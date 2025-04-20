@@ -8,6 +8,7 @@ public class MainMenu extends JFrame implements ActionListener {
 
     private JLabel label;
     private JButton button;
+    private JButton button2;
 
 
     public MainMenu() {
@@ -28,6 +29,14 @@ public class MainMenu extends JFrame implements ActionListener {
         button.setBorderPainted(false);
         this.add(button);
 
+        ImageIcon exit = new ImageIcon("");
+        button2 = new JButton("Exit");
+        button2.setBounds(200, 200, 200, 200);
+        button2.addActionListener(this);
+        button2.setFocusable(false);
+        button2.setBorderPainted(false);
+        this.add(button2);
+
         label = new JLabel(backgroundImage);
         label.setBounds(0, 0, 500, 500);
         this.add(label);
@@ -38,6 +47,9 @@ public class MainMenu extends JFrame implements ActionListener {
         if (e.getSource() == button) {
             Home home = new Home();
             this.dispose();
+        }
+        if (e.getSource() == button2) {
+            System.exit(0);
         }
     }
 }
