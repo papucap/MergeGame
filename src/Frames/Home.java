@@ -14,15 +14,15 @@ public class Home extends JFrame implements ActionListener {
         this.setTitle("Home");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(null);
-        this.setSize(500, 500);
+        this.setSize(1920, 1080);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setVisible(true);
         ImageIcon backgroundImage = new ImageIcon("");
 
         ImageIcon play = new ImageIcon("");
-        button = new JButton("Play");
-        button.setBounds(0, 0, 200, 200);
+        button = new JButton("ADD");
+        button.setBounds(960, 850, 200, 200);
         button.addActionListener(this);
         button.setFocusable(false);
         button.setBorderPainted(false);
@@ -30,25 +30,25 @@ public class Home extends JFrame implements ActionListener {
 
         ImageIcon exit = new ImageIcon("");
         button2 = new JButton("Exit");
-        button2.setBounds(200, 200, 200, 200);
+        button2.setBounds(0, 850, 200, 200);
         button2.addActionListener(this);
         button2.setFocusable(false);
         button2.setBorderPainted(false);
         this.add(button2);
 
         label = new JLabel(backgroundImage);
-        label.setBounds(0, 0, 500, 500);
+        label.setBounds(0, 0, 1920, 1080);
         this.add(label);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == button) {
-            MainMenu mainMenu = new MainMenu();
-            this.dispose();
+            Menu menu = new Menu();
         }
         if (e.getSource() == button2) {
-            System.exit(0);
+            MainMenu mainMenu = new MainMenu();
+            this.dispose();
         }
     }
 
