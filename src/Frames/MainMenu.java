@@ -18,21 +18,26 @@ public class MainMenu extends JFrame implements ActionListener {
         this.setSize(1920, 1080);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.setUndecorated(true);
+        ImageIcon backgroundImage = new ImageIcon("Image/MainMenu.png");
         this.setVisible(true);
-        ImageIcon backgroundImage = new ImageIcon("");
 
-        ImageIcon play = new ImageIcon("");
-        button = new JButton("Play");
-        button.setBounds(0, 0, 200, 200);
+
+        button = new JButton("");
+        button.setBounds(745, 420, 350, 120);
         button.addActionListener(this);
+        button.setOpaque(false);
+        button.setContentAreaFilled(false);
         button.setFocusable(false);
         button.setBorderPainted(false);
         this.add(button);
 
-        ImageIcon exit = new ImageIcon("");
-        button2 = new JButton("Exit");
-        button2.setBounds(200, 200, 200, 200);
+        ImageIcon exit = new ImageIcon("Image/Exit.png");
+        button2 = new JButton(exit);
+        button2.setBounds(0, 850, 248, 183);
         button2.addActionListener(this);
+        button2.setOpaque(false);
+        button2.setContentAreaFilled(false);
         button2.setFocusable(false);
         button2.setBorderPainted(false);
         this.add(button2);

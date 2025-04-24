@@ -4,13 +4,13 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Menu extends JFrame implements ActionListener {
+public class Shop extends JFrame implements ActionListener {
     private JLabel label;
     private JButton button;
     private JButton button2;
 
 
-    public Menu() {
+    public Shop() {
         this.setTitle("Menu");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(null);
@@ -28,10 +28,12 @@ public class Menu extends JFrame implements ActionListener {
         button.setBorderPainted(false);
         this.add(button);
 
-        ImageIcon exit = new ImageIcon("");
-        button2 = new JButton("Exit");
-        button2.setBounds(400, 400, 100, 100);
+        ImageIcon exit = new ImageIcon("Image/Exit.png");
+        button2 = new JButton(exit);
+        button2.setBounds(400, 400, 248, 183);
         button2.addActionListener(this);
+        button2.setOpaque(false);
+        button2.setContentAreaFilled(false);
         button2.setFocusable(false);
         button2.setBorderPainted(false);
         this.add(button2);

@@ -44,7 +44,7 @@ public class Home extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == button) {
-            Menu menu = new Menu();
+            Shop game = new Shop();
         }
         if (e.getSource() == button2) {
             MainMenu mainMenu = new MainMenu();
