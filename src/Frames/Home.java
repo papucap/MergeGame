@@ -20,18 +20,22 @@ public class Home extends JFrame implements ActionListener {
         this.setVisible(true);
         ImageIcon backgroundImage = new ImageIcon("");
 
-        ImageIcon play = new ImageIcon("");
-        button = new JButton("ADD");
-        button.setBounds(960, 850, 200, 200);
+        ImageIcon shop = new ImageIcon("Image/Shop.png");
+        button = new JButton(shop);
+        button.setBounds(960, 850, 314, 315);
         button.addActionListener(this);
+        button.setOpaque(false);
+        button.setContentAreaFilled(false);
         button.setFocusable(false);
         button.setBorderPainted(false);
         this.add(button);
 
-        ImageIcon exit = new ImageIcon("");
-        button2 = new JButton("Exit");
-        button2.setBounds(0, 850, 200, 200);
+        ImageIcon exit = new ImageIcon("Image/Exit.png");
+        button2 = new JButton(exit);
+        button2.setBounds(0, 850, 248, 183);
         button2.addActionListener(this);
+        button2.setOpaque(false);
+        button2.setContentAreaFilled(false);
         button2.setFocusable(false);
         button2.setBorderPainted(false);
         this.add(button2);
