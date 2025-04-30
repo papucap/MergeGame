@@ -3,14 +3,16 @@ package Frames;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import Product.Product;
 
 public class Home extends JFrame implements ActionListener {
-    private JLabel label;
-    private JButton button;
-    private JButton button2;
-
+    private ArrayList<Product> products;
+    private JButton mergeButton;
+    private JButton shopButton;
 
     public Home() {
+        products = new ArrayList<>();
         this.setTitle("Home");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(null);
@@ -18,43 +20,43 @@ public class Home extends JFrame implements ActionListener {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setVisible(true);
-        ImageIcon backgroundImage = new ImageIcon("");
 
-        ImageIcon shop = new ImageIcon("Image/Shop.png");
-        button = new JButton(shop);
-        button.setBounds(960, 850, 314, 315);
-        button.addActionListener(this);
-        button.setOpaque(false);
-        button.setContentAreaFilled(false);
-        button.setFocusable(false);
-        button.setBorderPainted(false);
-        this.add(button);
+        mergeButton = new JButton("Merge Products");
+        mergeButton.setBounds(100, 100, 200, 50);
+        mergeButton.addActionListener(this);
+        this.add(mergeButton);
 
-        ImageIcon exit = new ImageIcon("Image/Exit.png");
-        button2 = new JButton(exit);
-        button2.setBounds(0, 850, 248, 183);
-        button2.addActionListener(this);
-        button2.setOpaque(false);
-        button2.setContentAreaFilled(false);
-        button2.setFocusable(false);
-        button2.setBorderPainted(false);
-        this.add(button2);
+        shopButton = new JButton("Go to Shop");
+        shopButton.setBounds(100, 200, 200, 50);
+        shopButton.addActionListener(e -> new Shop(this));
+        this.add(shopButton);
+    }
 
-        label = new JLabel(backgroundImage);
-        label.setBounds(0, 0, 1920, 1080);
-        this.add(label);
+    public void addProduct(Product product) {
+        products.add(product);
+        System.out.println("Product added: Level " + product.getLevel());
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == button) {
-            Shop game = new Shop();
-        }
-        if (e.getSource() == button2) {
-            MainMenu mainMenu = new MainMenu();
-            this.dispose();
+        if (e.getSource() == mergeButton) {
+            mergeProducts();
         }
     }
 
-
+    private void mergeProducts() {
+        for (int i = 0; i < products.size(); i++) {
+            for (int j = i + 1; j < products.size(); j++) {
+                Product mergedProduct = products.get(i).merge(products.get(j));
+                if (mergedProduct != null) {
+                    products.remove(j);
+                    products.remove(i);
+                    products.add(mergedProduct);
+                    System.out.println("Merged to Level " + mergedProduct.getLevel());
+                    return;
+                }
+            }
+        }
+        System.out.println("No products to merge.");
+    }
 }
