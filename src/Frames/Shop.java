@@ -1,9 +1,10 @@
 package Frames;
 
+import Product.Product;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import Product.Product;
 
 public class Shop extends JFrame implements ActionListener {
     private JButton buyButton;
@@ -12,7 +13,7 @@ public class Shop extends JFrame implements ActionListener {
     public Shop(Home home) {
         this.home = home;
         this.setTitle("Shop");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         this.setLayout(null);
         this.setSize(600, 600);
         this.setLocationRelativeTo(null);
@@ -28,7 +29,11 @@ public class Shop extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == buyButton) {
-            home.addProduct(new Product(1));
+            if (home.getProductCount() < 6) { // Check if the maximum limit is reached
+                home.addProduct(new Product(1)); // Add a level 1 product to Home
+            } else {
+                JOptionPane.showMessageDialog(this, "Maximum product limit reached!");
+            }
         }
     }
 }
