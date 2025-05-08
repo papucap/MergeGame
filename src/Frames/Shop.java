@@ -1,6 +1,6 @@
 package Frames;
 
-import Product.Product;
+import Product.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -9,9 +9,13 @@ import java.awt.event.ActionListener;
 public class Shop extends JFrame implements ActionListener {
     private JButton buyButton;
     private Home home;
+    private Coin coin;
 
-    public Shop(Home home) {
+
+
+    public Shop(Home home, Coin coin) {
         this.home = home;
+        this.coin = coin;
         this.setTitle("Shop");
 
         this.setLayout(null);
@@ -20,20 +24,25 @@ public class Shop extends JFrame implements ActionListener {
         this.setResizable(false);
         this.setVisible(true);
 
-        buyButton = new JButton("BUY Level 1 Product");
+        buyButton = new JButton("BUY Level 1 Product 100Coins");
         buyButton.setBounds(200, 250, 200, 100);
         buyButton.addActionListener(this);
         this.add(buyButton);
+
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == buyButton) {
-            if (home.getProductCount() < 6) { // Check if the maximum limit is reached
-                home.addProduct(new Product(1)); // Add a level 1 product to Home
+            if (home.getProductCount() < 6 && coin.getCoins() >= 100) { // Check if the maximum limit is reached
+                home.addProduct(new Product(1));
+                coin.buy(100);
             } else {
                 JOptionPane.showMessageDialog(this, "Maximum product limit reached!");
             }
         }
     }
+
+
 }
