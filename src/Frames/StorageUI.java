@@ -17,7 +17,7 @@ public class StorageUI extends JFrame {
         this.storage = storage;
 
         setTitle("Storage");
-        setSize(600, 400);
+        setSize(1000, 1000);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
@@ -25,12 +25,14 @@ public class StorageUI extends JFrame {
         panel.setLayout(new GridLayout(0, 4, 10, 10));
         refreshStorage();
 
-        JScrollPane scrollPane = new JScrollPane(panel);
+        JScrollPane scrollPane = new JScrollPane(panel); //Internet: jak pouzivat JScrollPane https://www.geeksforgeeks.org/java-jscrollpane/
+
         add(scrollPane, BorderLayout.CENTER);
 
         setVisible(true);
     }
 
+    //Internet: jak pouzivat JOptionPane https://www.geeksforgeeks.org/java-joptionpane/
     private void refreshStorage() {
         panel.removeAll();
         List<Product> products = storage.getProducts();

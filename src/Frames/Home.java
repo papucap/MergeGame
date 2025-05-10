@@ -20,7 +20,7 @@ public class Home extends JFrame {
 
         this.setTitle("Home");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(1000, 600);
+        this.setSize(1920, 1080);
         this.setLayout(null);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -28,19 +28,19 @@ public class Home extends JFrame {
 
         for (int i = 0; i < 6; i++) {
             productButtons[i] = new JButton("Empty");
-            productButtons[i].setBounds(300 + (i % 3) * 150, 100 + (i / 3) * 150, 120, 120);
+            productButtons[i].setBounds(100 + (i % 3) * 200, 100 + (i / 3) * 200, 192, 199);
             this.add(productButtons[i]);
         }
 
 
         mergeButton = new JButton("Merge");
-        mergeButton.setBounds(100, 100, 150, 50);
+        mergeButton.setBounds(100, 500, 200, 50);
         mergeButton.addActionListener(e -> checkForMerge());
         this.add(mergeButton);
 
 
         storageButton = new JButton("Open Storage");
-        storageButton.setBounds(100, 200, 150, 50);
+        storageButton.setBounds(100, 600, 200, 50);
         storageButton.addActionListener(e -> new StorageUI(this, storage));
         this.add(storageButton);
 
@@ -48,6 +48,7 @@ public class Home extends JFrame {
         updateFieldDisplay();
     }
 
+    //Vygenerovano AI
     private void updateFieldDisplay() {
         for (int i = 0; i < productButtons.length; i++) {
             JButton btn = productButtons[i];
@@ -67,7 +68,7 @@ public class Home extends JFrame {
                 btn.setText("Level " + product.getLevel());
                 btn.setIcon(product.getImage());
                 int finalI = i;
-                btn.addActionListener(e -> showProductOptions(finalI));
+                btn.addActionListener(e -> addProductToStorage(finalI));
             }
         }
     }
@@ -84,40 +85,15 @@ public class Home extends JFrame {
         }
     }
 
-    private void showProductOptions(int index) {
+    private void addProductToStorage(int index) {
         Product p = productsOnField[index];
-        if (p == null) return;
+        storage.addProduct(p);
+        productsOnField[index] = null;
+        updateFieldDisplay();
 
-        String[] options = {"Merge", "Storage", "Cancel"};
-        int choice = JOptionPane.showOptionDialog(this,
-                "Choose an action for level " + p.getLevel(),
-                "Product Options",
-                JOptionPane.DEFAULT_OPTION,
-                JOptionPane.INFORMATION_MESSAGE,
-                null, options, options[0]);
-
-        if (choice == 0) {
-            tryMerge(p, index);
-        } else if (choice == 1) {
-            storage.addProduct(p);
-            productsOnField[index] = null;
-            updateFieldDisplay();
-        }
+        JOptionPane.showMessageDialog(this, "Product moved to storage!");
     }
 
-    private void tryMerge(Product product, int excludeIndex) {
-        for (int i = 0; i < productsOnField.length; i++) {
-            if (i != excludeIndex && productsOnField[i] != null &&
-                    productsOnField[i].getLevel() == product.getLevel()) {
-
-                productsOnField[excludeIndex] = null;
-                productsOnField[i] = new Product(product.getLevel() + 1);
-                updateFieldDisplay();
-                return;
-            }
-        }
-        JOptionPane.showMessageDialog(this, "No matching product to merge.");
-    }
 
     public boolean addProductFromStorage(Product product) {
         for (int i = 0; i < productsOnField.length; i++) {
@@ -130,6 +106,7 @@ public class Home extends JFrame {
         return false;
     }
 
+    //Vygenerovano AI
     private void checkForMerge() {
         for (int i = 0; i < productsOnField.length; i++) {
             Product p1 = productsOnField[i];
@@ -140,8 +117,9 @@ public class Home extends JFrame {
                 if (p2 != null && p1.getLevel() == p2.getLevel()) {
                     productsOnField[i] = null;
                     productsOnField[j] = new Product(p1.getLevel() + 1);
+                    coin.sell(100 * p1.getLevel());
                     updateFieldDisplay();
-                    JOptionPane.showMessageDialog(this, "Merged to level " + (p1.getLevel() + 1));
+                    JOptionPane.showMessageDialog(this, "Merged to level " + (p1.getLevel() + 1) + "\nCoins Added: " + 100 * p1.getLevel());
                     return;
                 }
             }

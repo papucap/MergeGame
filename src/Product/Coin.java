@@ -17,6 +17,7 @@ public class Coin {
     public void sell (int amount){
         setCoins(coins+amount);
     }
+
     public int getCoins() {
         return coins;
     }
