@@ -1,142 +1,152 @@
 package Frames;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import Product.*;
+import javax.swing.*;
+import java.awt.event.*;
 
-public class Home extends JFrame implements ActionListener {
-    private ArrayList<Product> products;
+
+public class Home extends JFrame {
+    private Product[] productsOnField = new Product[6];
+    private JButton[] productButtons = new JButton[6];
+
     private JButton mergeButton;
-    private JButton shopButton;
-    private JPanel productPanel; // Panel to display products
-
-    private JLabel label;
+    private JButton storageButton;
     private Coin coin;
-
-    // Product buttons
-    private JButton[] productButtons;
+    private Storage storage;
 
     public Home(Coin coin) {
         this.coin = coin;
-        products = new ArrayList<>();
+        this.storage = new Storage();
+
         this.setTitle("Home");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(1000, 600);
         this.setLayout(null);
-        this.setSize(1920, 1080);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-        this.setVisible(true);
 
-        mergeButton = new JButton("Merge Products");
-        mergeButton.setBounds(100, 100, 200, 50);
-        mergeButton.addActionListener(this);
+
+        for (int i = 0; i < 6; i++) {
+            productButtons[i] = new JButton("Empty");
+            productButtons[i].setBounds(300 + (i % 3) * 150, 100 + (i / 3) * 150, 120, 120);
+            this.add(productButtons[i]);
+        }
+
+
+        mergeButton = new JButton("Merge");
+        mergeButton.setBounds(100, 100, 150, 50);
+        mergeButton.addActionListener(e -> checkForMerge());
         this.add(mergeButton);
 
-        shopButton = new JButton("Go to Shop");
-        shopButton.setBounds(100, 200, 200, 50);
-        shopButton.addActionListener(e -> new Shop(this, coin));
-        this.add(shopButton);
 
-        // Increase the size of the product display panel
-        productPanel = new JPanel();
-        productPanel.setBounds(300, 0, 800, 800); // Increased width and height
-        productPanel.setLayout(new GridLayout(0, 1)); // Vertical layout for products
-        this.add(productPanel);
+        storageButton = new JButton("Open Storage");
+        storageButton.setBounds(100, 200, 150, 50);
+        storageButton.addActionListener(e -> new StorageUI(this, storage));
+        this.add(storageButton);
 
-        label = new JLabel();
-        label.setBounds(1000, 50, 100, 100);
-        label.setVisible(true);
-        this.add(label);
+        this.setVisible(true);
+        updateFieldDisplay();
+    }
 
-        // Initialize product buttons
-        productButtons = new JButton[6];
+    private void updateFieldDisplay() {
         for (int i = 0; i < productButtons.length; i++) {
-            productButtons[i] = new JButton();
-            productButtons[i].setBounds(100, 400 + (i * 60), 200, 50);
-            productButtons[i].setIcon(new ImageIcon("path/to/level1_image.png")); // Set image for level 1
-            final int productLevel = 1; // All buttons will buy level 1 products
-            productButtons[i].addActionListener(e -> buyProduct(productLevel));
-            this.add(productButtons[i]);
+            JButton btn = productButtons[i];
+            Product product = productsOnField[i];
+
+
+            for (ActionListener al : btn.getActionListeners()) {
+                btn.removeActionListener(al);
+            }
+
+            if (product == null) {
+                btn.setText("Empty");
+                btn.setIcon(null);
+                int finalI = i;
+                btn.addActionListener(e -> tryBuyProduct(finalI));
+            } else {
+                btn.setText("Level " + product.getLevel());
+                btn.setIcon(product.getImage());
+                int finalI = i;
+                btn.addActionListener(e -> showProductOptions(finalI));
+            }
         }
     }
 
-    private void buyProduct(int level) {
-        if (coin.getCoins() >= 100) { // Assuming each product costs 100 coins
-            if (products.size() < 6) { // Limit to 6 products
-                addProduct(new Product(level));
+    private void tryBuyProduct(int index) {
+        if (productsOnField[index] == null) {
+            if (coin.getCoins() >= 100) {
+                productsOnField[index] = new Product(1);
                 coin.buy(100);
-                checkForMerge(); // Check for merging after buying
+                updateFieldDisplay();
             } else {
-                JOptionPane.showMessageDialog(this, "Maximum of 6 products reached!");
+                JOptionPane.showMessageDialog(this, "Not enough coins!");
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Not enough coins to buy Product " + level + "!");
         }
+    }
+
+    private void showProductOptions(int index) {
+        Product p = productsOnField[index];
+        if (p == null) return;
+
+        String[] options = {"Merge", "Storage", "Cancel"};
+        int choice = JOptionPane.showOptionDialog(this,
+                "Choose an action for level " + p.getLevel(),
+                "Product Options",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.INFORMATION_MESSAGE,
+                null, options, options[0]);
+
+        if (choice == 0) {
+            tryMerge(p, index);
+        } else if (choice == 1) {
+            storage.addProduct(p);
+            productsOnField[index] = null;
+            updateFieldDisplay();
+        }
+    }
+
+    private void tryMerge(Product product, int excludeIndex) {
+        for (int i = 0; i < productsOnField.length; i++) {
+            if (i != excludeIndex && productsOnField[i] != null &&
+                    productsOnField[i].getLevel() == product.getLevel()) {
+
+                productsOnField[excludeIndex] = null;
+                productsOnField[i] = new Product(product.getLevel() + 1);
+                updateFieldDisplay();
+                return;
+            }
+        }
+        JOptionPane.showMessageDialog(this, "No matching product to merge.");
+    }
+
+    public boolean addProductFromStorage(Product product) {
+        for (int i = 0; i < productsOnField.length; i++) {
+            if (productsOnField[i] == null) {
+                productsOnField[i] = product;
+                updateFieldDisplay();
+                return true;
+            }
+        }
+        return false;
     }
 
     private void checkForMerge() {
-        // Check for merging any products of the same level
-        boolean merged = true; // Flag to check if any merging happened
-        while (merged) {
-            merged = false; // Reset the flag
-            for (int i = 0; i < products.size(); i++) {
-                for (int j = i + 1; j < products.size(); j++) {
-                    if (products.get(i).getLevel() == products.get(j).getLevel()) {
-                        mergeProducts(products.get(i).getLevel()); // Merge if levels are the same
-                        merged = true; // Set flag to true if a merge happened
-                        break; // Exit inner loop to restart checking
-                    }
+        for (int i = 0; i < productsOnField.length; i++) {
+            Product p1 = productsOnField[i];
+            if (p1 == null) continue;
+
+            for (int j = i + 1; j < productsOnField.length; j++) {
+                Product p2 = productsOnField[j];
+                if (p2 != null && p1.getLevel() == p2.getLevel()) {
+                    productsOnField[i] = null;
+                    productsOnField[j] = new Product(p1.getLevel() + 1);
+                    updateFieldDisplay();
+                    JOptionPane.showMessageDialog(this, "Merged to level " + (p1.getLevel() + 1));
+                    return;
                 }
-                if (merged) break; // Exit outer loop if a merge happened
             }
         }
+        JOptionPane.showMessageDialog(this, "No matching products to merge.");
     }
 
-    private void mergeProducts(int level) {
-        ArrayList<Product> toMerge = new ArrayList<>();
-        for (Product product : products) {
-            if (product.getLevel() == level) {
-                toMerge.add(product);
-            }
-        }
-        if (toMerge.size() >= 2) {
-            // Create a new merged product
-            Product mergedProduct = new Product(level + 1);
-            products.removeAll(toMerge); // Remove the products being merged
-            products.add(mergedProduct); // Add the new merged product
-            updateProductDisplay(); // Update the display after merging
-            System.out.println("Merged to Level " + mergedProduct.getLevel());
-            coin.sell(150); // Assuming selling gives back coins
-        }
-    }
-
-    public void addProduct(Product product) {
-        products.add(product);
-        updateProductDisplay(); // Update the display after adding a product
-        System.out.println("Product added: Level " + product.getLevel());
-    }
-
-    public int getProductCount() {
-        return products.size(); // Return the current number of products
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == mergeButton) {
-            // Merging logic can be handled in buyProduct now
-        }
-    }
-
-    private void updateProductDisplay() {
-        productPanel.removeAll(); // Clear previous products
-        for (Product product : products) {
-            JLabel productLabel = new JLabel("Level " + product.getLevel(), product.getImage(), JLabel.LEFT);
-            productPanel.add(productLabel); // Add product image and level to the panel
-        }
-        productPanel.revalidate(); // Refresh the panel
-        productPanel.repaint(); // Repaint the panel
-    }
 }

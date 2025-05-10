@@ -19,14 +19,14 @@ public class Product {
         return image; // Getter for the image
     }
 
-    public Product merge(Product other) {
-        if (this.level == other.level) {
-            return new Product(this.level + 1);
-        }
-        return null;
-    }
+
 
     private ImageIcon loadImage(int level) {
-        return new ImageIcon("images/" + level + ".png");
+        if (level < 15){
+            return new ImageIcon("Image/Level/" + level + ".png");
+        }
+        else {
+            return new ImageIcon("Image/Level/15.png");
+        }
     }
 }
