@@ -11,8 +11,11 @@ public class Home extends JFrame {
 
     private JButton mergeButton;
     private JButton storageButton;
+    private JButton saveButton;
+    private JButton loadButton;
     private Coin coin;
     private Storage storage;
+
 
     public Home(Coin coin) {
         this.coin = coin;
@@ -44,10 +47,30 @@ public class Home extends JFrame {
         storageButton.addActionListener(e -> new StorageUI(this, storage));
         this.add(storageButton);
 
+        saveButton = new JButton("Save Game");
+        saveButton.setBounds(800, 300, 200, 50);
+        saveButton.addActionListener(e -> {
+            SaveManage.saveGame(coin, productsOnField, storage.getProducts());
+            JOptionPane.showMessageDialog(this, "Save Complete.");
+        });
+        this.add(saveButton);
+
+        loadButton = new JButton("Load");
+        loadButton.setBounds(745, 410, 350, 120);
+        loadButton.addActionListener(e -> loadGame());
+        this.add(loadButton);
+
         this.setVisible(true);
         updateFieldDisplay();
     }
 
+    private void loadGame() {
+        SaveManage.loadGame(coin,productsOnField,storage.getProducts());
+        for (int i = 0; i < productButtons.length; i++) {
+            updateFieldDisplay();
+        }
+        JOptionPane.showMessageDialog(this, "Load complete.");
+    }
     //Vygenerovano AI
     private void updateFieldDisplay() {
         for (int i = 0; i < productButtons.length; i++) {

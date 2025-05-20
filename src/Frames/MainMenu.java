@@ -1,6 +1,7 @@
 package Frames;
 
 import Product.Coin;
+import Product.SaveManage;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -11,6 +12,7 @@ public class MainMenu extends JFrame implements ActionListener {
     private JLabel label;
     private JButton button;
     private JButton button2;
+    private JButton loadButton;
 
     private Coin coin;
 

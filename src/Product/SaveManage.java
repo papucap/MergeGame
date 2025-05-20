@@ -1,14 +1,12 @@
 package Product;
 
-import Product.Coin;
-import Product.Product;
-
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SaveManage {
 
-    public static void saveGame(Coin coin, Product[] products, ArrayList<Product> storageList) {
+    public static void saveGame(Coin coin, Product[] products, List<Product> storageList) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("save.txt"))) {
             writer.write(String.valueOf(coin.getCoins()));
             writer.newLine();
@@ -35,7 +33,7 @@ public class SaveManage {
         }
     }
 
-    public static void loadGame(Coin coin, Product[] product, ArrayList<Product> storageList) {
+    public static void loadGame(Coin coin, Product[] product, List<Product> storageList) {
         try (BufferedReader reader = new BufferedReader(new FileReader("save.txt"))) {
 
             int coins = Integer.parseInt(reader.readLine());
