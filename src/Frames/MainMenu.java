@@ -15,9 +15,11 @@ public class MainMenu extends JFrame implements ActionListener {
     private JButton loadButton;
 
     private Coin coin;
+    private Settings settings;
 
-    public MainMenu(Coin coin) {
+    public MainMenu(Coin coin, Settings settings) {
         this.coin = coin;
+        this.settings = settings;
         this.setTitle("Main Menu");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(null);
@@ -25,7 +27,7 @@ public class MainMenu extends JFrame implements ActionListener {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setUndecorated(true);
-        ImageIcon backgroundImage = new ImageIcon("Image/MainMenu.png");
+        ImageIcon backgroundImage = new ImageIcon("/Image/"+ settings.updateTheme() + "/MainMenu.png");
         this.setVisible(true);
 
 

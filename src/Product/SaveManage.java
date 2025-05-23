@@ -1,11 +1,13 @@
 package Product;
 
+import Frames.Settings;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SaveManage {
-
+    private Settings settings;
     public static void saveGame(Coin coin, Product[] products, List<Product> storageList) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("save.txt"))) {
             writer.write(String.valueOf(coin.getCoins()));
@@ -33,7 +35,7 @@ public class SaveManage {
         }
     }
 
-    public static void loadGame(Coin coin, Product[] product, List<Product> storageList) {
+    public static void loadGame(Coin coin, Product[] product, List<Product> storageList,Settings settings ) {
         try (BufferedReader reader = new BufferedReader(new FileReader("save.txt"))) {
 
             int coins = Integer.parseInt(reader.readLine());
@@ -43,7 +45,7 @@ public class SaveManage {
             String[] productLevel = reader.readLine().split(",");
             for (int i = 0; i < productLevel.length && i < productLevel.length; i++) {
                 int lvl = Integer.parseInt(productLevel[i]);
-                product[i] = (lvl > 0) ? new Product(lvl) : null;
+                product[i] = (lvl > 0) ? new Product(lvl,settings) : null;
             }
 
             storageList.clear();
@@ -52,7 +54,7 @@ public class SaveManage {
                 String[] storageLevels = storageLine.split(",");
                 for (String s : storageLevels) {
                     int lvl = Integer.parseInt(s);
-                    storageList.add(new Product(lvl));
+                    storageList.add(new Product(lvl,settings));
                 }
             }
 

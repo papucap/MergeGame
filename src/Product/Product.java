@@ -1,14 +1,17 @@
 package Product;
 
+import Frames.Settings;
+
 import javax.swing.ImageIcon;
 
 public class Product {
     private int level;
     private ImageIcon image; // Add an image attribute
+    private Settings settings;
 
-    public Product(int level) {
+    public Product(int level, Settings settings) {
         this.level = level;
-        this.image = loadImage(level); // Load the image based on the level
+        this.image = loadImage(level, settings); // Load the image based on the level
     }
 
     public int getLevel() {
@@ -21,12 +24,12 @@ public class Product {
 
 
 
-    private ImageIcon loadImage(int level) {
+    private ImageIcon loadImage(int level, Settings settings) {
         if (level < 15){
-            return new ImageIcon("Image/Level/" + level + ".png");
+            return new ImageIcon("Image/" + settings.updateTheme() + "/Level/" + level + ".png");
         }
         else {
-            return new ImageIcon("Image/Level/15.png");
+            return new ImageIcon("Image/" + settings.updateTheme()+ "/Level/15.png");
         }
     }
 }

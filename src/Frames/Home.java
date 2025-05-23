@@ -13,8 +13,10 @@ public class Home extends JFrame {
     private JButton storageButton;
     private JButton saveButton;
     private JButton loadButton;
+    private JButton settingsButton;
     private Coin coin;
     private Storage storage;
+    private Settings settings;
 
 
     public Home(Coin coin) {
@@ -60,12 +62,16 @@ public class Home extends JFrame {
         loadButton.addActionListener(e -> loadGame());
         this.add(loadButton);
 
+        settingsButton = new JButton("Settings");
+        settingsButton.setBounds(800, 400, 200, 50);
+        settingsButton.addActionListener(e -> new Settings());
+
         this.setVisible(true);
         updateFieldDisplay();
     }
 
     private void loadGame() {
-        SaveManage.loadGame(coin,productsOnField,storage.getProducts());
+        SaveManage.loadGame(coin,productsOnField,storage.getProducts(),settings);
         for (int i = 0; i < productButtons.length; i++) {
             updateFieldDisplay();
         }
@@ -99,7 +105,7 @@ public class Home extends JFrame {
     private void tryBuyProduct(int index) {
         if (productsOnField[index] == null) {
             if (coin.getCoins() >= 100) {
-                productsOnField[index] = new Product(1);
+                productsOnField[index] = new Product(1,settings);
                 coin.buy(100);
                 updateFieldDisplay();
             } else {
@@ -139,7 +145,7 @@ public class Home extends JFrame {
                 Product p2 = productsOnField[j];
                 if (p2 != null && p1.getLevel() == p2.getLevel()) {
                     productsOnField[i] = null;
-                    productsOnField[j] = new Product(p1.getLevel() + 1);
+                    productsOnField[j] = new Product(p1.getLevel() + 1,settings);
                     coin.sell(100 * p1.getLevel());
                     updateFieldDisplay();
                     JOptionPane.showMessageDialog(this, "Merged to level " + (p1.getLevel() + 1) + "\nCoins Added: " + 100 * p1.getLevel());
