@@ -14,14 +14,17 @@ public class Home extends JFrame {
     private JButton saveButton;
     private JButton loadButton;
     private JButton settingsButton;
+    private JButton exitButton;
+    private JButton tutorialButton;
     private Coin coin;
     private Storage storage;
     private Settings settings;
 
 
-    public Home(Coin coin) {
+    public Home(Coin coin, Settings settings) {
         this.coin = coin;
         this.storage = new Storage();
+        this.settings = settings;
 
         this.setTitle("Home");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,18 +42,18 @@ public class Home extends JFrame {
 
 
         mergeButton = new JButton("Merge");
-        mergeButton.setBounds(100, 500, 200, 50);
+        mergeButton.setBounds(500, 950, 200, 50);
         mergeButton.addActionListener(e -> checkForMerge());
         this.add(mergeButton);
 
 
         storageButton = new JButton("Open Storage");
-        storageButton.setBounds(100, 600, 200, 50);
+        storageButton.setBounds(250, 950, 200, 50);
         storageButton.addActionListener(e -> new StorageUI(this, storage));
         this.add(storageButton);
 
         saveButton = new JButton("Save Game");
-        saveButton.setBounds(800, 300, 200, 50);
+        saveButton.setBounds(1250, 950, 200, 50);
         saveButton.addActionListener(e -> {
             SaveManage.saveGame(coin, productsOnField, storage.getProducts());
             JOptionPane.showMessageDialog(this, "Save Complete.");
@@ -58,13 +61,24 @@ public class Home extends JFrame {
         this.add(saveButton);
 
         loadButton = new JButton("Load");
-        loadButton.setBounds(745, 410, 350, 120);
+        loadButton.setBounds(750, 950, 200, 50);
         loadButton.addActionListener(e -> loadGame());
         this.add(loadButton);
 
         settingsButton = new JButton("Settings");
-        settingsButton.setBounds(800, 400, 200, 50);
+        settingsButton.setBounds(1000, 950, 200, 50);
         settingsButton.addActionListener(e -> new Settings());
+        this.add(settingsButton);
+
+        exitButton = new JButton("Exit");
+        exitButton.setBounds(0, 950, 200, 50);
+        exitButton.addActionListener(e -> System.exit(0));
+        this.add(exitButton);
+
+        tutorialButton = new JButton("Tutorial");
+        tutorialButton.setBounds(1500, 950, 200, 50);
+        tutorialButton.addActionListener(e -> new Tutorial());
+        this.add(tutorialButton);
 
         this.setVisible(true);
         updateFieldDisplay();
