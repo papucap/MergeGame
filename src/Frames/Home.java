@@ -16,6 +16,7 @@ public class Home extends JFrame {
     private JButton settingsButton;
     private JButton exitButton;
     private JButton tutorialButton;
+    private JLabel coinLabel;
     private Coin coin;
     private Storage storage;
     private Settings settings;
@@ -80,6 +81,10 @@ public class Home extends JFrame {
         tutorialButton.addActionListener(e -> new Tutorial());
         this.add(tutorialButton);
 
+        coinLabel = new JLabel(String.valueOf(coin.getCoins()));
+        coinLabel.setBounds(1500,200,200,50);
+        this.add(coinLabel);
+
         this.setVisible(true);
         updateFieldDisplay();
     }
@@ -90,6 +95,7 @@ public class Home extends JFrame {
             updateFieldDisplay();
         }
         JOptionPane.showMessageDialog(this, "Load complete.");
+        updateCoinLabel();
     }
     //Vygenerovano AI
     private void updateFieldDisplay() {
@@ -122,6 +128,7 @@ public class Home extends JFrame {
                 productsOnField[index] = new Product(1,settings);
                 coin.buy(100);
                 updateFieldDisplay();
+                updateCoinLabel();
             } else {
                 JOptionPane.showMessageDialog(this, "Not enough coins!");
             }
@@ -162,12 +169,17 @@ public class Home extends JFrame {
                     productsOnField[j] = new Product(p1.getLevel() + 1,settings);
                     coin.sell(100 * p1.getLevel());
                     updateFieldDisplay();
+                    updateCoinLabel();
                     JOptionPane.showMessageDialog(this, "Merged to level " + (p1.getLevel() + 1) + "\nCoins Added: " + 100 * p1.getLevel());
                     return;
                 }
             }
         }
         JOptionPane.showMessageDialog(this, "No matching products to merge.");
+    }
+
+    private void updateCoinLabel() {
+        coinLabel.setText("Peníze: " + coin.getCoins());
     }
 
 }

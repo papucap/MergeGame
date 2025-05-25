@@ -25,5 +25,7 @@ public class Coin {
     public void setCoins(int coins) {
         this.coins = coins;
     }
+
+
 }
 
