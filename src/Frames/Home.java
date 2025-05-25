@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.awt.event.*;
 
 
-public class Home extends JFrame {
+public class Home extends JFrame implements ActionListener  {
     private Product[] productsOnField = new Product[6];
     private JButton[] productButtons = new JButton[6];
 
@@ -16,16 +16,19 @@ public class Home extends JFrame {
     private JButton settingsButton;
     private JButton exitButton;
     private JButton tutorialButton;
+    private JButton statisticsButton;
     private JLabel coinLabel;
     private Coin coin;
     private Storage storage;
     private Settings settings;
+    private Statistics statistics;
 
 
-    public Home(Coin coin, Settings settings) {
+    public Home(Coin coin, Settings settings, Statistics statistics) {
         this.coin = coin;
         this.storage = new Storage();
         this.settings = settings;
+        this.statistics = statistics;
 
         this.setTitle("Home");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,42 +47,44 @@ public class Home extends JFrame {
 
         mergeButton = new JButton("Merge");
         mergeButton.setBounds(500, 950, 200, 50);
-        mergeButton.addActionListener(e -> checkForMerge());
+        mergeButton.addActionListener(this);
         this.add(mergeButton);
 
 
         storageButton = new JButton("Open Storage");
         storageButton.setBounds(250, 950, 200, 50);
-        storageButton.addActionListener(e -> new StorageUI(this, storage));
+        storageButton.addActionListener(this);
         this.add(storageButton);
 
         saveButton = new JButton("Save Game");
         saveButton.setBounds(1250, 950, 200, 50);
-        saveButton.addActionListener(e -> {
-            SaveManage.saveGame(coin, productsOnField, storage.getProducts());
-            JOptionPane.showMessageDialog(this, "Save Complete.");
-        });
+        saveButton.addActionListener(this);
         this.add(saveButton);
 
         loadButton = new JButton("Load");
         loadButton.setBounds(750, 950, 200, 50);
-        loadButton.addActionListener(e -> loadGame());
+        loadButton.addActionListener(this);
         this.add(loadButton);
 
         settingsButton = new JButton("Settings");
         settingsButton.setBounds(1000, 950, 200, 50);
-        settingsButton.addActionListener(e -> new Settings());
+        settingsButton.addActionListener(this);
         this.add(settingsButton);
 
         exitButton = new JButton("Exit");
         exitButton.setBounds(0, 950, 200, 50);
-        exitButton.addActionListener(e -> System.exit(0));
+        exitButton.addActionListener(this);
         this.add(exitButton);
 
         tutorialButton = new JButton("Tutorial");
         tutorialButton.setBounds(1500, 950, 200, 50);
-        tutorialButton.addActionListener(e -> new Tutorial());
+        tutorialButton.addActionListener(this);
         this.add(tutorialButton);
+
+        statisticsButton = new JButton("Statistics");
+        statisticsButton.setBounds(1700, 950, 200, 50);
+        statisticsButton.addActionListener(this);
+        this.add(statisticsButton);
 
         coinLabel = new JLabel(String.valueOf(coin.getCoins()));
         coinLabel.setBounds(1500,200,200,50);
@@ -89,8 +94,38 @@ public class Home extends JFrame {
         updateFieldDisplay();
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == statisticsButton) {
+            StatsFrame statsFrame = new StatsFrame(statistics);
+        }
+        if (e.getSource() == tutorialButton) {
+            Tutorial tutorial = new Tutorial();
+        }
+        if (e.getSource() == saveButton) {
+            SaveManage.saveGame(coin, productsOnField, storage.getProducts(),statistics);
+            JOptionPane.showMessageDialog(this, "Save Complete.");
+        }
+        if (e.getSource() == mergeButton) {
+            checkForMerge();
+        }
+        if (e.getSource() == storageButton) {
+            new StorageUI(this, storage);
+        }
+        if (e.getSource() == loadButton) {
+            loadGame();
+        }
+        if (e.getSource() == settingsButton) {
+            Settings settings = new Settings();
+        }
+        if (e.getSource() == exitButton) {
+            System.exit(0);
+        }
+    }
+
+
     private void loadGame() {
-        SaveManage.loadGame(coin,productsOnField,storage.getProducts(),settings);
+        SaveManage.loadGame(coin,productsOnField,storage.getProducts(),settings,statistics);
         for (int i = 0; i < productButtons.length; i++) {
             updateFieldDisplay();
         }
@@ -127,6 +162,7 @@ public class Home extends JFrame {
             if (coin.getCoins() >= 100) {
                 productsOnField[index] = new Product(1,settings);
                 coin.buy(100);
+                statistics.addSpendCoins(100);
                 updateFieldDisplay();
                 updateCoinLabel();
             } else {
@@ -168,6 +204,8 @@ public class Home extends JFrame {
                     productsOnField[i] = null;
                     productsOnField[j] = new Product(p1.getLevel() + 1,settings);
                     coin.sell(100 * p1.getLevel());
+                    statistics.addMerges();
+                    statistics.updateMaxLevel(p1.getLevel()+1);
                     updateFieldDisplay();
                     updateCoinLabel();
                     JOptionPane.showMessageDialog(this, "Merged to level " + (p1.getLevel() + 1) + "\nCoins Added: " + 100 * p1.getLevel());
@@ -179,7 +217,7 @@ public class Home extends JFrame {
     }
 
     private void updateCoinLabel() {
-        coinLabel.setText("Peníze: " + coin.getCoins());
+        coinLabel.setText(""+coin.getCoins());
     }
 
 }

@@ -12,7 +12,6 @@ public class Tutorial extends JFrame {
 
     public Tutorial() {
         this.setTitle("Tutorial");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(null);
         this.setSize(1000, 1000);
         this.setLocationRelativeTo(null);

@@ -1,6 +1,7 @@
 package Frames;
 
 import Product.Coin;
+import Product.Statistics;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -15,11 +16,13 @@ public class MainMenu extends JFrame implements ActionListener {
 
     private Coin coin;
     private Settings settings;
+    private Statistics statistics;
 
     public MainMenu(Coin coin) {
         this.coin = coin;
         this.settings = new Settings();
         settings.updateTheme();
+        this.statistics = new Statistics();
         this.setTitle("Main Menu");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(null);
@@ -58,7 +61,7 @@ public class MainMenu extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == button) {
-            Home home = new Home(coin,settings);
+            Home home = new Home(coin,settings,statistics);
             this.dispose();
         }
         if (e.getSource() == button2) {

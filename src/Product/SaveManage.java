@@ -8,7 +8,7 @@ import java.util.List;
 
 public class SaveManage {
     private Settings settings;
-    public static void saveGame(Coin coin, Product[] products, List<Product> storageList) {
+    public static void saveGame(Coin coin, Product[] products, List<Product> storageList, Statistics statistics) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("save.txt"))) {
             writer.write(String.valueOf(coin.getCoins()));
             writer.newLine();
@@ -30,12 +30,14 @@ public class SaveManage {
                     writer.write(",");
                 }
             }
+            writer.newLine();
+            writer.write(statistics.getMerges() + "," + statistics.getMaxLevel() + "," + statistics.getSpendCoins());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static void loadGame(Coin coin, Product[] product, List<Product> storageList,Settings settings ) {
+    public static void loadGame(Coin coin, Product[] product, List<Product> storageList,Settings settings, Statistics statistics ) {
         try (BufferedReader reader = new BufferedReader(new FileReader("save.txt"))) {
 
             int coins = Integer.parseInt(reader.readLine());
@@ -57,6 +59,14 @@ public class SaveManage {
                     storageList.add(new Product(lvl,settings));
                 }
             }
+            String statsLine = reader.readLine();
+            if (statsLine != null && !statsLine.isEmpty()) {
+                String[] parts = statsLine.split(",");
+                statistics.setMerges(Integer.parseInt(parts[0]));
+                statistics.setMaxLevel(Integer.parseInt(parts[1]));
+                statistics.setSpendCoins(Integer.parseInt(parts[2]));
+            }
+
 
         } catch (IOException e) {
             System.out.println("No save file found.");
