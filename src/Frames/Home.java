@@ -17,6 +17,7 @@ public class Home extends JFrame implements ActionListener  {
     private JButton exitButton;
     private JButton tutorialButton;
     private JButton statisticsButton;
+    private JButton specialMergeButton;
     private JLabel coinLabel;
     private Coin coin;
     private Storage storage;
@@ -86,6 +87,11 @@ public class Home extends JFrame implements ActionListener  {
         statisticsButton.addActionListener(this);
         this.add(statisticsButton);
 
+        specialMergeButton = new JButton("Special Merge");
+        specialMergeButton.setBounds(500, 650, 200, 50);
+        specialMergeButton.addActionListener(this);
+        this.add(specialMergeButton);
+
         coinLabel = new JLabel(String.valueOf(coin.getCoins()));
         coinLabel.setBounds(1500,200,200,50);
         this.add(coinLabel);
@@ -120,6 +126,9 @@ public class Home extends JFrame implements ActionListener  {
         }
         if (e.getSource() == exitButton) {
             System.exit(0);
+        }
+        if (e.getSource() == specialMergeButton) {
+            specialMerge();
         }
     }
 
@@ -192,7 +201,6 @@ public class Home extends JFrame implements ActionListener  {
         return false;
     }
 
-    //Vygenerovano AI
     private void checkForMerge() {
         for (int i = 0; i < productsOnField.length; i++) {
             Product p1 = productsOnField[i];
@@ -201,6 +209,13 @@ public class Home extends JFrame implements ActionListener  {
             for (int j = i + 1; j < productsOnField.length; j++) {
                 Product p2 = productsOnField[j];
                 if (p2 != null && p1.getLevel() == p2.getLevel()) {
+                    int newLevel = p1.getLevel() + 1;
+
+                    if (newLevel > 15) {
+                        JOptionPane.showMessageDialog(this, "Maximum level is 15. Merge not allowed.");
+                        return;
+                    }
+
                     productsOnField[i] = null;
                     productsOnField[j] = new Product(p1.getLevel() + 1,settings);
                     coin.sell(100 * p1.getLevel());
@@ -215,6 +230,47 @@ public class Home extends JFrame implements ActionListener  {
         }
         JOptionPane.showMessageDialog(this, "No matching products to merge.");
     }
+
+    //Vygenerovano AI
+    private void specialMerge() {
+        int[][] specialCombinations = {
+                {13, 15, 50},
+                {10, 13, 51},
+                {11, 15, 52},
+                {1, 15, 53},
+                {4, 15, 54}
+        };
+
+        for (int i = 0; i < productsOnField.length; i++) {
+            Product p1 = productsOnField[i];
+            if (p1 == null) continue;
+
+            for (int j = i + 1; j < productsOnField.length; j++) {
+                Product p2 = productsOnField[j];
+                if (p2 == null) continue;
+
+                int lvl1 = p1.getLevel();
+                int lvl2 = p2.getLevel();
+
+                for (int[] combo : specialCombinations) {
+                    if ((lvl1 == combo[0] && lvl2 == combo[1]) || (lvl1 == combo[1] && lvl2 == combo[0])) {
+                        productsOnField[i] = null;
+                        productsOnField[j] = new Product(combo[2], settings);
+                        coin.sell(10000);
+                        statistics.addMerges();
+                        statistics.updateMaxLevel(combo[2]);
+                        updateFieldDisplay();
+                        updateCoinLabel();
+                        JOptionPane.showMessageDialog(this, "Special Merge: " + lvl1 + " + " + lvl2 + " → " + combo[2]);
+                        return;
+                    }
+                }
+            }
+        }
+
+        JOptionPane.showMessageDialog(this, "No special combinations found to merge.");
+    }
+
 
     private void updateCoinLabel() {
         coinLabel.setText(""+coin.getCoins());

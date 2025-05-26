@@ -28,7 +28,22 @@ public class Product {
         if (level < 15){
             return new ImageIcon("Image/" + settings.updateTheme() + "/Level/" + level + ".png");
         }
-        else {
+        else if (level == 50) {
+            return new ImageIcon("Image/" + settings.updateTheme()+ "/Level/15.png");
+        }
+        else if (level == 51) {
+            return new ImageIcon("Image/" + settings.updateTheme()+ "/Level/15.png");
+        }
+        else if (level == 52) {
+            return new ImageIcon("Image/" + settings.updateTheme()+ "/Level/15.png");
+        }
+        else if (level == 53) {
+            return new ImageIcon("Image/" + settings.updateTheme()+ "/Level/15.png");
+        }
+        else if (level == 54) {
+            return new ImageIcon("Image/" + settings.updateTheme()+ "/Level/15.png");
+        }
+        else{
             return new ImageIcon("Image/" + settings.updateTheme()+ "/Level/15.png");
         }
     }
