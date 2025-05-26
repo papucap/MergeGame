@@ -1,6 +1,7 @@
 package Frames;
 import Product.*;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
 public class Home extends JFrame implements ActionListener  {
@@ -16,6 +17,7 @@ public class Home extends JFrame implements ActionListener  {
     private JButton statisticsButton;
     private JButton specialMergeButton;
     private JLabel coinLabel;
+    private JLabel backgroundLabel;
     private Coin coin;
     private Storage storage;
     private Settings settings;
@@ -36,32 +38,41 @@ public class Home extends JFrame implements ActionListener  {
 
 
         for (int i = 0; i < 6; i++) {
-            productButtons[i] = new JButton("Empty");
-            productButtons[i].setBounds(100 + (i % 3) * 200, 100 + (i / 3) * 200, 192, 199);
+            productButtons[i] = new JButton();
+            productButtons[i].setBounds(500 + (i % 3) * 300, 200 + (i / 3) * 300, 192, 199);
+            productButtons[i].setOpaque(false);
+            productButtons[i].setContentAreaFilled(false);
+            productButtons[i].setFocusable(false);
+            productButtons[i].setBorderPainted(false);
             this.add(productButtons[i]);
         }
-        mergeButton = new JButton("Merge");
-        mergeButton.setBounds(500, 950, 200, 50);
+        ImageIcon mergeIcon = new ImageIcon("Image/"+settings.updateTheme()+"/Buttons/merge.png");
+        mergeButton = new JButton(mergeIcon);
+        mergeButton.setBounds(500, 850, 304, 96);
         mergeButton.addActionListener(this);
         this.add(mergeButton);
 
-        storageButton = new JButton("Open Storage");
-        storageButton.setBounds(250, 950, 200, 50);
+        ImageIcon storageIcon = new ImageIcon("Image/"+settings.updateTheme()+"/Buttons/open_storage.png");
+        storageButton = new JButton(storageIcon);
+        storageButton.setBounds(850, 850, 304, 96);
         storageButton.addActionListener(this);
         this.add(storageButton);
 
-        saveButton = new JButton("Save Game");
-        saveButton.setBounds(1250, 950, 200, 50);
+        ImageIcon saveIcon = new ImageIcon("Image/"+settings.updateTheme()+"/Buttons/save.png");
+        saveButton = new JButton(saveIcon);
+        saveButton.setBounds(1200, 950, 304, 96);
         saveButton.addActionListener(this);
         this.add(saveButton);
 
-        loadButton = new JButton("Load");
-        loadButton.setBounds(750, 950, 200, 50);
+        ImageIcon loadIcon = new ImageIcon("Image/"+settings.updateTheme()+"/Buttons/load.png");
+        loadButton = new JButton(loadIcon);
+        loadButton.setBounds(1200, 850, 304, 96);
         loadButton.addActionListener(this);
         this.add(loadButton);
 
-        settingsButton = new JButton("Settings");
-        settingsButton.setBounds(1000, 950, 200, 50);
+        ImageIcon settingsIcon = new ImageIcon("Image/"+settings.updateTheme()+"/Buttons/settings.png");
+        settingsButton = new JButton(settingsIcon);
+        settingsButton.setBounds(850, 950, 304, 96);
         settingsButton.addActionListener(this);
         this.add(settingsButton);
 
@@ -75,27 +86,35 @@ public class Home extends JFrame implements ActionListener  {
         exitButton.setBorderPainted(false);
         this.add(exitButton);
 
-        tutorialButton = new JButton("Tutorial");
-        tutorialButton.setBounds(1500, 950, 200, 50);
+        ImageIcon tutorialIcon = new ImageIcon("Image/"+settings.updateTheme()+"/Buttons/tutorial.png");
+        tutorialButton = new JButton(tutorialIcon);
+        tutorialButton.setBounds(1550, 850, 304, 96);
         tutorialButton.addActionListener(this);
         this.add(tutorialButton);
 
-        statisticsButton = new JButton("Statistics");
-        statisticsButton.setBounds(1700, 950, 200, 50);
+        ImageIcon statisticsIcon = new ImageIcon("Image/"+settings.updateTheme()+"/Buttons/stats.png");
+        statisticsButton = new JButton(statisticsIcon);
+        statisticsButton.setBounds(1550, 950, 304, 96);
         statisticsButton.addActionListener(this);
         this.add(statisticsButton);
 
-        specialMergeButton = new JButton("Special Merge");
-        specialMergeButton.setBounds(500, 650, 200, 50);
+        ImageIcon specialIcon = new ImageIcon("Image/"+settings.updateTheme()+"/Buttons/special_merge.png");
+        specialMergeButton = new JButton(specialIcon);
+        specialMergeButton.setBounds(500, 950, 304, 96);
         specialMergeButton.addActionListener(this);
         this.add(specialMergeButton);
 
         coinLabel = new JLabel(String.valueOf(coin.getCoins()));
         coinLabel.setBounds(1500,200,200,50);
+        coinLabel.setFont(new Font("Arial", Font.BOLD,48));
         this.add(coinLabel);
-
         this.setVisible(true);
         updateFieldDisplay();
+
+        ImageIcon backgroundIcon = new ImageIcon("Image/"+settings.updateTheme()+"/BackgroundHome.png");
+        backgroundLabel = new JLabel(backgroundIcon);
+        backgroundLabel.setSize(1920, 1080);
+        this.add(backgroundLabel);
     }
 
     @Override
@@ -120,7 +139,10 @@ public class Home extends JFrame implements ActionListener  {
             loadGame();
         }
         if (e.getSource() == settingsButton) {
-            Settings settings = new Settings();
+            JOptionPane.showMessageDialog(this, "Game saved.");
+            SaveManage.saveGame(coin, productsOnField, storage.getProducts(),statistics);
+            this.dispose();
+            Settings settings = new Settings(coin,statistics);
         }
         if (e.getSource() == exitButton) {
             System.exit(0);

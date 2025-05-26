@@ -20,7 +20,7 @@ public class MainMenu extends JFrame implements ActionListener {
 
     public MainMenu(Coin coin) {
         this.coin = coin;
-        this.settings = new Settings();
+        this.settings = new Settings(coin, statistics);
         settings.updateTheme();
         this.statistics = new Statistics();
         this.setTitle("Main Menu");
