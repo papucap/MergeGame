@@ -6,12 +6,12 @@ import javax.swing.ImageIcon;
 
 public class Product {
     private int level;
-    private ImageIcon image; // Add an image attribute
+    private ImageIcon image;
     private Settings settings;
 
     public Product(int level, Settings settings) {
         this.level = level;
-        this.image = loadImage(level, settings); // Load the image based on the level
+        this.image = loadImage(level, settings);
     }
 
     public int getLevel() {
@@ -19,7 +19,7 @@ public class Product {
     }
 
     public ImageIcon getImage() {
-        return image; // Getter for the image
+        return image;
     }
 
 
