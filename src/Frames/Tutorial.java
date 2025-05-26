@@ -26,7 +26,7 @@ public class Tutorial extends JFrame {
         themeButton.setBounds(800, 500, 200, 50);
         this.add(themeButton);
 
-        exitButton = new JButton("Exit");
+        exitButton = new JButton(exitImage);
         exitButton.setBounds(300, 500, 200, 50);
         exitButton.addActionListener(e -> this.dispose());
         this.add(exitButton);

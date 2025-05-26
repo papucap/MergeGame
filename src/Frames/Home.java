@@ -1,14 +1,11 @@
 package Frames;
-
 import Product.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-
 public class Home extends JFrame implements ActionListener  {
     private Product[] productsOnField = new Product[6];
     private JButton[] productButtons = new JButton[6];
-
     private JButton mergeButton;
     private JButton storageButton;
     private JButton saveButton;
@@ -23,7 +20,6 @@ public class Home extends JFrame implements ActionListener  {
     private Storage storage;
     private Settings settings;
     private Statistics statistics;
-
 
     public Home(Coin coin, Settings settings, Statistics statistics) {
         this.coin = coin;
@@ -44,13 +40,10 @@ public class Home extends JFrame implements ActionListener  {
             productButtons[i].setBounds(100 + (i % 3) * 200, 100 + (i / 3) * 200, 192, 199);
             this.add(productButtons[i]);
         }
-
-
         mergeButton = new JButton("Merge");
         mergeButton.setBounds(500, 950, 200, 50);
         mergeButton.addActionListener(this);
         this.add(mergeButton);
-
 
         storageButton = new JButton("Open Storage");
         storageButton.setBounds(250, 950, 200, 50);
@@ -72,9 +65,14 @@ public class Home extends JFrame implements ActionListener  {
         settingsButton.addActionListener(this);
         this.add(settingsButton);
 
-        exitButton = new JButton("Exit");
-        exitButton.setBounds(0, 950, 200, 50);
+        ImageIcon exit = new ImageIcon("Image/Exit.png");
+        exitButton = new JButton(exit);
+        exitButton.setBounds(0, 850, 248, 183);
         exitButton.addActionListener(this);
+        exitButton.setOpaque(false);
+        exitButton.setContentAreaFilled(false);
+        exitButton.setFocusable(false);
+        exitButton.setBorderPainted(false);
         this.add(exitButton);
 
         tutorialButton = new JButton("Tutorial");
@@ -103,7 +101,7 @@ public class Home extends JFrame implements ActionListener  {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == statisticsButton) {
-            StatsFrame statsFrame = new StatsFrame(statistics);
+            StatsFrame statsFrame = new StatsFrame(statistics, settings);
         }
         if (e.getSource() == tutorialButton) {
             Tutorial tutorial = new Tutorial();
@@ -131,8 +129,6 @@ public class Home extends JFrame implements ActionListener  {
             specialMerge();
         }
     }
-
-
     private void loadGame() {
         SaveManage.loadGame(coin,productsOnField,storage.getProducts(),settings,statistics);
         for (int i = 0; i < productButtons.length; i++) {
@@ -188,8 +184,6 @@ public class Home extends JFrame implements ActionListener  {
 
         JOptionPane.showMessageDialog(this, "Product moved to storage!");
     }
-
-
     public boolean addProductFromStorage(Product product) {
         for (int i = 0; i < productsOnField.length; i++) {
             if (productsOnField[i] == null) {
@@ -230,7 +224,6 @@ public class Home extends JFrame implements ActionListener  {
         }
         JOptionPane.showMessageDialog(this, "No matching products to merge.");
     }
-
     //Vygenerovano AI
     private void specialMerge() {
         int[][] specialCombinations = {
@@ -261,19 +254,17 @@ public class Home extends JFrame implements ActionListener  {
                         statistics.updateMaxLevel(combo[2]);
                         updateFieldDisplay();
                         updateCoinLabel();
+                        statistics.unlockSpecialLevel(combo[2]);
                         JOptionPane.showMessageDialog(this, "Special Merge: " + lvl1 + " + " + lvl2 + " → " + combo[2]);
                         return;
                     }
                 }
             }
         }
-
         JOptionPane.showMessageDialog(this, "No special combinations found to merge.");
     }
-
 
     private void updateCoinLabel() {
         coinLabel.setText(""+coin.getCoins());
     }
-
 }

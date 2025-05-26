@@ -4,6 +4,7 @@ public class Statistics {
     private int merges;
     private int maxLevel;
     private int spendCoins;
+    private boolean[] specialLevels = new boolean[5];
 
     public Statistics() {
         this.merges = 0;
@@ -23,6 +24,27 @@ public class Statistics {
         if (level > maxLevel) {
             maxLevel = level;
         }
+    }
+
+    public void unlockSpecialLevel(int level) {
+        if (level >= 50 && level <= 54) {
+            specialLevels[level-50] = true;
+        }
+    }
+
+    public boolean isSpecialLevelUnlocked(int level) {
+        if (level >= 50 && level <= 54) {
+            return specialLevels[level - 50];
+        }
+        return false;
+    }
+
+    public boolean[] getSpecialLevels() {
+        return specialLevels;
+    }
+
+    public void setSpecialLevels(boolean[] specialLevels) {
+        this.specialLevels = specialLevels;
     }
 
     public int getMerges() {
