@@ -74,23 +74,23 @@ public class StatsFrame extends JFrame implements ActionListener {
         exitButton.setBorderPainted(false);
         this.add(exitButton);
 
-        label50 = new JLabel("Image/"+settings.updateTheme() +"/50.png");
+        label50 = new JLabel("Image/"+settings.updateTheme() + "/" +statistics.isSpecialLevelUnlocked(50) +"/50.png");
         label50.setBounds(500,100,200,50);
         this.add(label50);
 
-        label51 = new JLabel("Image/"+settings.updateTheme() +"/51.png");
+        label51 = new JLabel("Image/"+settings.updateTheme() + "/" +statistics.isSpecialLevelUnlocked(51)+"/51.png");
         label51.setBounds(500,300,200,50);
         this.add(label51);
 
-        label52 = new JLabel("Image/"+settings.updateTheme() +"/52.png");
+        label52 = new JLabel("Image/"+settings.updateTheme() + "/" +statistics.isSpecialLevelUnlocked(52)+"/52.png");
         label52.setBounds(500,500,200,50);
         this.add(label52);
 
-        label53 = new JLabel("Image/"+settings.updateTheme() +"/53.png");
+        label53 = new JLabel("Image/"+settings.updateTheme() +"/" +statistics.isSpecialLevelUnlocked(53)+"/53.png");
         label53.setBounds(500,700,200,50);
         this.add(label53);
 
-        label54 = new JLabel("Image/"+settings.updateTheme() +"/54.png");
+        label54 = new JLabel("Image/"+settings.updateTheme() +"/" + statistics.isSpecialLevelUnlocked(54)+"/54.png");
         label54.setBounds(500,900,200,50);
         this.add(label54);
 

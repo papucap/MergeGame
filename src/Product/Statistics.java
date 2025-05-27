@@ -33,8 +33,8 @@ public class Statistics {
     }
 
     public boolean isSpecialLevelUnlocked(int level) {
-        if (level >= 50 && level <= 54) {
-            return specialLevels[level - 50];
+        if (level >= 50 && level <= 54 && specialLevels[level-50] == true) {
+            return true;
         }
         return false;
     }

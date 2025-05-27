@@ -8,7 +8,8 @@ import java.awt.event.ActionListener;
 
 public class Settings extends JFrame implements ActionListener {
 
-    private JButton themeButton;
+    private JButton darkButton;
+    private JButton lightButton;
     private JButton exitButton;
     private JLabel label;
     private Coin coin;
@@ -24,26 +25,44 @@ public class Settings extends JFrame implements ActionListener {
         this.setTitle("Settings");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(null);
-        this.setSize(1000, 1000);
+        this.setSize(1024, 1024);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setUndecorated(true);
-        //ImageIcon backgroundImage = new ImageIcon("Image/MainMenu.png");
+        ImageIcon backgroundImage = new ImageIcon("Image/Settings.png");
         this.setVisible(true);
 
 
-        themeButton = new JButton("DARK MODE");
-        themeButton.setBounds(500, 500, 200, 50);
-        themeButton.addActionListener(this);
-        this.add(themeButton);
+        darkButton = new JButton();
+        darkButton.setBounds(200, 550, 625, 200);
+        darkButton.addActionListener(this);
+        darkButton.setOpaque(false);
+        darkButton.setContentAreaFilled(false);
+        darkButton.setFocusable(false);
+        darkButton.setBorderPainted(false);
+        this.add(darkButton);
 
-        exitButton = new JButton("LIGHT MODE");
-        exitButton.setBounds(0, 500, 200, 50);
+        lightButton = new JButton();
+        lightButton.setBounds(200, 300, 625, 200);
+        lightButton.addActionListener(this);
+        lightButton.setOpaque(false);
+        lightButton.setContentAreaFilled(false);
+        lightButton.setFocusable(false);
+        lightButton.setBorderPainted(false);
+        this.add(lightButton);
+
+        ImageIcon exit = new ImageIcon("Image/Exit.png");
+        exitButton = new JButton(exit);
+        exitButton.setBounds(0, 850, 248, 183);
         exitButton.addActionListener(this);
+        exitButton.setOpaque(false);
+        exitButton.setContentAreaFilled(false);
+        exitButton.setFocusable(false);
+        exitButton.setBorderPainted(false);
         this.add(exitButton);
 
-        label = new JLabel();
-        label.setSize(1000, 1000);
+        label = new JLabel(backgroundImage);
+        label.setSize(1024, 1024);
         this.add(label);
     }
 
@@ -64,14 +83,18 @@ public class Settings extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == exitButton) {
+        if (e.getSource() == lightButton) {
             JOptionPane.showMessageDialog(this, "Please load your game again");
             new Home(coin,this,statistics);
             this.dispose();
         }
-        if (e.getSource() == themeButton) {
+        if (e.getSource() == darkButton) {
             toggleTheme();
             JOptionPane.showMessageDialog(this, "Please load your game again");
+            new Home(coin,this,statistics);
+            this.dispose();
+        }
+        if (e.getSource() == exitButton) {
             new Home(coin,this,statistics);
             this.dispose();
         }

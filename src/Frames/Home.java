@@ -35,6 +35,7 @@ public class Home extends JFrame implements ActionListener  {
         this.setLayout(null);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.setUndecorated(true);
 
 
         for (int i = 0; i < 6; i++) {
