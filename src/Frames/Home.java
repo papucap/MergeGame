@@ -124,7 +124,7 @@ public class Home extends JFrame implements ActionListener  {
             StatsFrame statsFrame = new StatsFrame(statistics, settings);
         }
         if (e.getSource() == tutorialButton) {
-            Tutorial tutorial = new Tutorial();
+            Tutorial tutorial = new Tutorial(settings);
         }
         if (e.getSource() == saveButton) {
             SaveManage.saveGame(coin, productsOnField, storage.getProducts(),statistics);
