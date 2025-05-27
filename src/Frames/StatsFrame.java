@@ -33,13 +33,13 @@ public class StatsFrame extends JFrame implements ActionListener {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setUndecorated(true);
-        ImageIcon backgroundImage = new ImageIcon("Image/MainMenu.png");
+        ImageIcon backgroundImage = new ImageIcon("Image/"+settings.updateTheme()+"/Stats.png");
         this.setVisible(true);
 
-        Font textFont = new Font("Arial", Font.BOLD,48);
+        Font textFont = new Font("Arial", Font.BOLD,64);
 
         spendCoins = new JLabel(String.valueOf(statistics.getSpendCoins()));
-        spendCoins.setBounds(100,200,200,50);
+        spendCoins.setBounds(170,310,200,50);
         spendCoins.setFont(textFont);
         spendCoins.revalidate();
         spendCoins.repaint();
@@ -47,26 +47,26 @@ public class StatsFrame extends JFrame implements ActionListener {
 
         merges = new JLabel(String.valueOf(statistics.getMerges()));
         merges.setFont(textFont);
-        merges.setBounds(100,500,200,50);
+        merges.setBounds(170,500,200,50);
         merges.revalidate();
         merges.repaint();
         this.add(merges);
 
         maxLevel = new JLabel(String.valueOf(statistics.getMaxLevel()));
         maxLevel.setFont(textFont);
-        maxLevel.setBounds(100,800,200,50);
+        maxLevel.setBounds(170,700,200,50);
         maxLevel.revalidate();
         maxLevel.repaint();
         this.add(maxLevel);
 
         resetButton = new JButton("Reset");
-        resetButton.setBounds(500,500,200,50);
+        resetButton.setBounds(100,50,200,50);
         resetButton.addActionListener(this);
         this.add(resetButton);
 
         ImageIcon exit = new ImageIcon("Image/Exit.png");
         exitButton = new JButton(exit);
-        exitButton.setBounds(0, 850, 248, 183);
+        exitButton.setBounds(0, 820, 248, 183);
         exitButton.addActionListener(this);
         exitButton.setOpaque(false);
         exitButton.setContentAreaFilled(false);
@@ -74,24 +74,29 @@ public class StatsFrame extends JFrame implements ActionListener {
         exitButton.setBorderPainted(false);
         this.add(exitButton);
 
-        label50 = new JLabel("Image/"+settings.updateTheme() + "/" +statistics.isSpecialLevelUnlocked(50) +"/50.png");
-        label50.setBounds(500,100,200,50);
+        ImageIcon icon50 = new ImageIcon("Image/"+settings.updateTheme() + "/" +statistics.isSpecialLevelUnlocked(50) +"/50.png");
+        label50 = new JLabel(icon50);
+        label50.setBounds(530,215,130,179);
         this.add(label50);
 
-        label51 = new JLabel("Image/"+settings.updateTheme() + "/" +statistics.isSpecialLevelUnlocked(51)+"/51.png");
-        label51.setBounds(500,300,200,50);
+        ImageIcon icon51 = new ImageIcon("Image/"+settings.updateTheme() + "/" +statistics.isSpecialLevelUnlocked(51)+"/51.png");
+        label51 = new JLabel(icon51);
+        label51.setBounds(750,215,130,179);
         this.add(label51);
 
-        label52 = new JLabel("Image/"+settings.updateTheme() + "/" +statistics.isSpecialLevelUnlocked(52)+"/52.png");
-        label52.setBounds(500,500,200,50);
+        ImageIcon icon52 = new ImageIcon("Image/"+settings.updateTheme() + "/" +statistics.isSpecialLevelUnlocked(52)+"/52.png");
+        label52 = new JLabel(icon52);
+        label52.setBounds(530,430,130,179);
         this.add(label52);
 
-        label53 = new JLabel("Image/"+settings.updateTheme() +"/" +statistics.isSpecialLevelUnlocked(53)+"/53.png");
-        label53.setBounds(500,700,200,50);
+        ImageIcon icon53 = new ImageIcon("Image/"+settings.updateTheme() + "/" +statistics.isSpecialLevelUnlocked(53)+"/53.png");
+        label53 = new JLabel(icon53);
+        label53.setBounds(750,430,130,179);
         this.add(label53);
 
-        label54 = new JLabel("Image/"+settings.updateTheme() +"/" + statistics.isSpecialLevelUnlocked(54)+"/54.png");
-        label54.setBounds(500,900,200,50);
+        ImageIcon icon54 = new ImageIcon("Image/"+settings.updateTheme() + "/" +statistics.isSpecialLevelUnlocked(54)+"/54.png");
+        label54 = new JLabel(icon54);
+        label54.setBounds(530,655,130,179);
         this.add(label54);
 
         label = new JLabel(backgroundImage);

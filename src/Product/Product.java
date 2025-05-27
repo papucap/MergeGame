@@ -29,19 +29,19 @@ public class Product {
             return new ImageIcon("Image/" + settings.updateTheme() + "/Level/" + level + ".png");
         }
         else if (level == 50) {
-            return new ImageIcon("Image/" + settings.updateTheme()+ "/Level/15.png");
+            return new ImageIcon("Image/" + settings.updateTheme()+ "/true/50.png");
         }
         else if (level == 51) {
-            return new ImageIcon("Image/" + settings.updateTheme()+ "/Level/15.png");
+            return new ImageIcon("Image/" + settings.updateTheme()+ "/true/51.png");
         }
         else if (level == 52) {
-            return new ImageIcon("Image/" + settings.updateTheme()+ "/Level/15.png");
+            return new ImageIcon("Image/" + settings.updateTheme()+ "/true/52.png");
         }
         else if (level == 53) {
-            return new ImageIcon("Image/" + settings.updateTheme()+ "/Level/15.png");
+            return new ImageIcon("Image/" + settings.updateTheme()+ "/true/53.png");
         }
         else if (level == 54) {
-            return new ImageIcon("Image/" + settings.updateTheme()+ "/Level/15.png");
+            return new ImageIcon("Image/" + settings.updateTheme()+ "/true/54.png");
         }
         else{
             return new ImageIcon("Image/" + settings.updateTheme()+ "/Level/15.png");

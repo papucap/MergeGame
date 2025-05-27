@@ -105,9 +105,11 @@ public class Home extends JFrame implements ActionListener  {
         specialMergeButton.addActionListener(this);
         this.add(specialMergeButton);
 
-        coinLabel = new JLabel(String.valueOf(coin.getCoins()));
-        coinLabel.setBounds(1500,200,200,50);
-        coinLabel.setFont(new Font("Arial", Font.BOLD,48));
+        coinLabel = new JLabel("Coins: "+ coin.getCoins());
+        updateCoinLabel();
+        coinLabel.setBounds(1200,0,1000,100);
+        coinLabel.setFont(new Font("Arial", Font.BOLD,82));
+        coinLabel.setForeground(Color.WHITE);
         this.add(coinLabel);
         this.setVisible(true);
         updateFieldDisplay();
@@ -288,6 +290,6 @@ public class Home extends JFrame implements ActionListener  {
     }
 
     private void updateCoinLabel() {
-        coinLabel.setText(""+coin.getCoins());
+        coinLabel.setText("Coins: "+coin.getCoins());
     }
 }

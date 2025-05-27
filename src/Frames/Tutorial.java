@@ -27,7 +27,7 @@ public class Tutorial extends JFrame {
         this.setVisible(true);
 
 
-        themeButton = new JButton("Přepnout téma");
+        themeButton = new JButton();
         themeButton.setBounds(35, 850, 100, 100);
         themeButton.setOpaque(false);
         themeButton.setContentAreaFilled(false);
@@ -35,7 +35,7 @@ public class Tutorial extends JFrame {
         themeButton.setBorderPainted(false);
         this.add(themeButton);
 
-        button2 = new JButton("Přepnout téma");
+        button2 = new JButton();
         button2.setBounds(900, 870, 100, 100);
         button2.setOpaque(false);
         button2.setContentAreaFilled(false);
