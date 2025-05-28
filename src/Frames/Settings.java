@@ -1,6 +1,8 @@
 package Frames;
 import Product.Coin;
+import Product.SaveManage;
 import Product.Statistics;
+import Product.Storage;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -15,11 +17,13 @@ public class Settings extends JFrame implements ActionListener {
     private Coin coin;
     private Statistics statistics;
     private Home home;
+    private Storage storage;
 
 
-    public Settings(Coin coin, Statistics statistics) {
+    public Settings(Coin coin, Statistics statistics,Storage storage) {
         this.coin = coin;
         this.statistics = statistics;
+        this.storage = storage;
 
 
         this.setTitle("Settings");
@@ -84,14 +88,16 @@ public class Settings extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == lightButton) {
-            JOptionPane.showMessageDialog(this, "Please load your game again");
-            new Home(coin,this,statistics);
+            Home home = new Home(coin,this,statistics);
+            SaveManage.loadGame(coin, home.getProductsOnField(), storage.getProducts(),this,statistics,4);
+            home.loadGame();
             this.dispose();
         }
         if (e.getSource() == darkButton) {
             toggleTheme();
-            JOptionPane.showMessageDialog(this, "Please load your game again");
-            new Home(coin,this,statistics);
+            Home home = new Home(coin,this,statistics);
+            SaveManage.loadGame(coin, home.getProductsOnField(), storage.getProducts(),this,statistics,4);
+            home.loadGame();
             this.dispose();
         }
         if (e.getSource() == exitButton) {

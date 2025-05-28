@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
+    public Storage() {
+    }
+
     private List<Product> storedProducts = new ArrayList<>();
 
     public void addProduct(Product product) {

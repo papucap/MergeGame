@@ -120,6 +120,10 @@ public class Home extends JFrame implements ActionListener  {
         this.add(backgroundLabel);
     }
 
+    public Product[] getProductsOnField() {
+        return productsOnField;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == statisticsButton) {
@@ -129,8 +133,7 @@ public class Home extends JFrame implements ActionListener  {
             Tutorial tutorial = new Tutorial(settings);
         }
         if (e.getSource() == saveButton) {
-            SaveManage.saveGame(coin, productsOnField, storage.getProducts(),statistics);
-            JOptionPane.showMessageDialog(this, "Save Complete.");
+            SaveFrame saveFrame = new SaveFrame(coin,storage,this,statistics);
         }
         if (e.getSource() == mergeButton) {
             checkForMerge();
@@ -139,13 +142,14 @@ public class Home extends JFrame implements ActionListener  {
             new StorageUI(this, storage);
         }
         if (e.getSource() == loadButton) {
+            LoadFrame loadFrame = new LoadFrame(coin,storage,this,statistics,settings);
             loadGame();
         }
         if (e.getSource() == settingsButton) {
             JOptionPane.showMessageDialog(this, "Game saved.");
-            SaveManage.saveGame(coin, productsOnField, storage.getProducts(),statistics);
+            SaveManage.saveGame(coin, productsOnField, storage.getProducts(),statistics,4);
             this.dispose();
-            Settings settings = new Settings(coin,statistics);
+            Settings settings = new Settings(coin,statistics,storage);
         }
         if (e.getSource() == exitButton) {
             System.exit(0);
@@ -154,12 +158,10 @@ public class Home extends JFrame implements ActionListener  {
             specialMerge();
         }
     }
-    private void loadGame() {
-        SaveManage.loadGame(coin,productsOnField,storage.getProducts(),settings,statistics);
+    public void loadGame() {
         for (int i = 0; i < productButtons.length; i++) {
             updateFieldDisplay();
         }
-        JOptionPane.showMessageDialog(this, "Load complete.");
         updateCoinLabel();
     }
     //Vygenerovano AI

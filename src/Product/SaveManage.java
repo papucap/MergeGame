@@ -8,8 +8,8 @@ import java.util.List;
 
 public class SaveManage {
     private Settings settings;
-    public static void saveGame(Coin coin, Product[] products, List<Product> storageList, Statistics statistics) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("save.txt"))) {
+    public static void saveGame(Coin coin, Product[] products, List<Product> storageList, Statistics statistics,int index) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("save"+index+".txt"))) {
             writer.write(String.valueOf(coin.getCoins()));
             writer.newLine();
 
@@ -37,8 +37,8 @@ public class SaveManage {
         }
     }
 
-    public static void loadGame(Coin coin, Product[] product, List<Product> storageList,Settings settings, Statistics statistics ) {
-        try (BufferedReader reader = new BufferedReader(new FileReader("save.txt"))) {
+    public static void loadGame(Coin coin, Product[] product, List<Product> storageList,Settings settings, Statistics statistics,int index ) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("save"+index+".txt"))) {
 
             int coins = Integer.parseInt(reader.readLine());
             coin.setCoins(coins);

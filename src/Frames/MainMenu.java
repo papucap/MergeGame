@@ -2,6 +2,7 @@ package Frames;
 
 import Product.Coin;
 import Product.Statistics;
+import Product.Storage;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -18,9 +19,9 @@ public class MainMenu extends JFrame implements ActionListener {
     private Settings settings;
     private Statistics statistics;
 
-    public MainMenu(Coin coin) {
+    public MainMenu(Coin coin, Settings settings) {
         this.coin = coin;
-        this.settings = new Settings(coin, statistics);
+        this.settings = new Settings(coin, statistics, new Storage());
         settings.updateTheme();
         this.statistics = new Statistics();
         this.setTitle("Main Menu");
