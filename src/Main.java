@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
 
         Coin coin = new Coin(20000);
-        Settings settings = new Settings(coin,new Statistics(),new Storage());
-        MainMenu mainMenu = new MainMenu(coin,settings);
+
+        MainMenu mainMenu = new MainMenu(coin);
     }
 }

@@ -16,13 +16,11 @@ public class MainMenu extends JFrame implements ActionListener {
 
 
     private Coin coin;
-    private Settings settings;
+
     private Statistics statistics;
 
-    public MainMenu(Coin coin, Settings settings) {
+    public MainMenu(Coin coin) {
         this.coin = coin;
-        this.settings = new Settings(coin, statistics, new Storage());
-        settings.updateTheme();
         this.statistics = new Statistics();
         this.setTitle("Main Menu");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,7 +60,7 @@ public class MainMenu extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == button) {
-            Home home = new Home(coin,settings,statistics);
+            Home home = new Home(coin,new Settings(coin,statistics,new Storage()),statistics);
             this.dispose();
         }
         if (e.getSource() == button2) {
