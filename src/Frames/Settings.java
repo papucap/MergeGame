@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// Settings class allows the user to change application settings
+
 public class Settings extends JFrame implements ActionListener {
 
     private JButton darkButton;
@@ -70,13 +72,16 @@ public class Settings extends JFrame implements ActionListener {
         this.add(label);
     }
 
+    // Variable to track if dark mode is enabled
     private boolean isDarkMode = false;
 
+    // Method to toggle the theme between dark and light
     private void toggleTheme() {
         isDarkMode = !isDarkMode;
         updateTheme();
     }
 
+    // Method to update the theme based on the current mode
     public String updateTheme() {
         if (isDarkMode) {
             return "Dark";
