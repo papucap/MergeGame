@@ -9,6 +9,8 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// SaveFrame class allows the user to save game data
+
 public class SaveFrame extends JFrame implements ActionListener {
 
 
@@ -24,6 +26,7 @@ public class SaveFrame extends JFrame implements ActionListener {
     private Storage storage;
     private Settings settings;
 
+    // Constructor to initialize the SaveFrame
 
     public SaveFrame(Coin coin, Storage storage, Home home, Statistics statistics, Settings settings) {
         this.coin = coin;

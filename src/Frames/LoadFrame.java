@@ -9,6 +9,8 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// LoadFrame class allows the user to load saved game data
+
 public class LoadFrame extends JFrame implements ActionListener {
 
 
@@ -24,7 +26,7 @@ public class LoadFrame extends JFrame implements ActionListener {
     private Storage storage;
     private Settings settings;
 
-
+    // Constructor to initialize the LoadFrame
     public LoadFrame(Coin coin, Storage storage, Home home, Statistics statistics, Settings settings) {
         this.coin = coin;
         this.storage = storage;
