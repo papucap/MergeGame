@@ -12,6 +12,7 @@ public class Tutorial extends JFrame {
     private JButton exitButton;
     private Settings settings;
 
+    // Tutorial class provides a tutorial interface for the user
     public Tutorial(Settings settings) {
         this.settings = settings;
 
@@ -58,6 +59,7 @@ public class Tutorial extends JFrame {
         label1.setSize(1000, 1000);
         this.add(label1);
 
+        // Action listener for theme button to toggle images
         themeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 label1.setIcon(backgroundImage2);
