@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// StatsFrame class displays game statistics to the user
 public class StatsFrame extends JFrame implements ActionListener {
     private Statistics statistics;
     private Settings settings;
@@ -74,6 +75,7 @@ public class StatsFrame extends JFrame implements ActionListener {
         exitButton.setBorderPainted(false);
         this.add(exitButton);
 
+        //Initialize labels for special levels
         ImageIcon icon50 = new ImageIcon("Image/"+settings.updateTheme() + "/" +statistics.isSpecialLevelUnlocked(50) +"/50.png");
         label50 = new JLabel(icon50);
         label50.setBounds(530,215,130,179);
@@ -107,6 +109,7 @@ public class StatsFrame extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        // Reset statistics or exit based on button clicked
         if (e.getSource() == resetButton) {
             statistics.setMaxLevel(0);
             statistics.setSpendCoins(0);
@@ -118,6 +121,7 @@ public class StatsFrame extends JFrame implements ActionListener {
         }
     }
 
+    // Method to update displayed statistics
     private void updateLabel(){
         maxLevel.setText(String.valueOf(statistics.getMaxLevel()));
         spendCoins.setText(String.valueOf(statistics.getSpendCoins()));
