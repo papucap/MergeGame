@@ -4,9 +4,10 @@ import Frames.Settings;
 
 import javax.swing.ImageIcon;
 
+// Product class represents an item in the game
 public class Product {
-    private int level;
-    private ImageIcon image;
+    private int level; // Level of the product
+    private ImageIcon image; // Image representation of the product
     private Settings settings;
 
     public Product(int level, Settings settings) {
@@ -14,16 +15,18 @@ public class Product {
         this.image = loadImage(level, settings);
     }
 
+    // Getter method to retrieve the product level
     public int getLevel() {
         return level;
     }
 
+    // Getter method to retrieve the product image
     public ImageIcon getImage() {
         return image;
     }
 
 
-
+    // Method to load the image based on the product level
     private ImageIcon loadImage(int level, Settings settings) {
         if (level < 15){
             return new ImageIcon("Image/" + settings.updateTheme() + "/Level/" + level + ".png");
