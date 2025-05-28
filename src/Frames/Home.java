@@ -133,7 +133,7 @@ public class Home extends JFrame implements ActionListener  {
             Tutorial tutorial = new Tutorial(settings);
         }
         if (e.getSource() == saveButton) {
-            SaveFrame saveFrame = new SaveFrame(coin,storage,this,statistics);
+            SaveFrame saveFrame = new SaveFrame(coin,storage,this,statistics,settings);
         }
         if (e.getSource() == mergeButton) {
             checkForMerge();
@@ -146,7 +146,6 @@ public class Home extends JFrame implements ActionListener  {
             loadGame();
         }
         if (e.getSource() == settingsButton) {
-            JOptionPane.showMessageDialog(this, "Game saved.");
             SaveManage.saveGame(coin, productsOnField, storage.getProducts(),statistics,4);
             this.dispose();
             Settings settings = new Settings(coin,statistics,storage);
@@ -165,7 +164,7 @@ public class Home extends JFrame implements ActionListener  {
         updateCoinLabel();
     }
     //Vygenerovano AI
-    private void updateFieldDisplay() {
+    public void updateFieldDisplay() {
         for (int i = 0; i < productButtons.length; i++) {
             JButton btn = productButtons[i];
             Product product = productsOnField[i];
@@ -189,7 +188,7 @@ public class Home extends JFrame implements ActionListener  {
         }
     }
 
-    private void tryBuyProduct(int index) {
+    public void tryBuyProduct(int index) {
         if (productsOnField[index] == null) {
             if (coin.getCoins() >= 100) {
                 productsOnField[index] = new Product(1,settings);
@@ -203,7 +202,7 @@ public class Home extends JFrame implements ActionListener  {
         }
     }
 
-    private void addProductToStorage(int index) {
+    public void addProductToStorage(int index) {
         Product p = productsOnField[index];
         storage.addProduct(p);
         productsOnField[index] = null;
@@ -222,7 +221,7 @@ public class Home extends JFrame implements ActionListener  {
         return false;
     }
 
-    private void checkForMerge() {
+    public void checkForMerge() {
         for (int i = 0; i < productsOnField.length; i++) {
             Product p1 = productsOnField[i];
             if (p1 == null) continue;
@@ -252,7 +251,7 @@ public class Home extends JFrame implements ActionListener  {
         JOptionPane.showMessageDialog(this, "No matching products to merge.");
     }
     //Vygenerovano AI
-    private void specialMerge() {
+    public void specialMerge() {
         int[][] specialCombinations = {
                 {13, 15, 50},
                 {10, 13, 51},

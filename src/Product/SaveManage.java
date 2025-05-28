@@ -8,6 +8,7 @@ import java.util.List;
 
 public class SaveManage {
     private Settings settings;
+
     public static void saveGame(Coin coin, Product[] products, List<Product> storageList, Statistics statistics,int index) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("save"+index+".txt"))) {
             writer.write(String.valueOf(coin.getCoins()));
