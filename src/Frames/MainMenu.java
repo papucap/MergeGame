@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+// MainMenu class represents the main menu of the application
+
 public class MainMenu extends JFrame implements ActionListener {
 
     private JLabel label;
@@ -59,6 +61,7 @@ public class MainMenu extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        // Start game or exit based on button clicked
         if (e.getSource() == button) {
             Home home = new Home(coin,new Settings(coin,statistics,new Storage()),statistics);
             this.dispose();
