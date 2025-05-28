@@ -1,16 +1,16 @@
 package Product;
 
-import Product.Coin;
-import Product.SaveManage;
-import Product.Statistics;
-import Product.Storage;
+
 import org.junit.jupiter.api.*;
 import java.io.File;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// SaveManageTest class contains unit tests for the SaveManage class
+
 public class SaveManageTest {
 
+    // Test to verify that saving the game creates a save file
     @Test
     public void testSaveGameCreatesFile() {
         Coin coin = new Coin(1000);
@@ -21,9 +21,9 @@ public class SaveManageTest {
         SaveManage.saveGame(coin, field, storage.getProducts(), statistics, 0);
 
         File saveFile = new File("save0.txt");
-        assertTrue(saveFile.exists());
+        assertTrue(saveFile.exists()); // Assert that the save file exists
 
-        // Uklid po testu
-        saveFile.delete();
+
+        saveFile.delete(); // Delete the save file
     }
 }
