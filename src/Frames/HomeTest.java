@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// HomeTest class contains unit tests for the Home class
+
 public class HomeTest {
 
     private Home home;
@@ -14,6 +16,7 @@ public class HomeTest {
     private Settings settings;
     private Statistics statistics;
 
+    // Setup method to initialize objects before each test
     @BeforeEach
     public void setUp() {
         coin = new Coin(10000);
@@ -23,6 +26,7 @@ public class HomeTest {
         storage = new Storage();
     }
 
+    // Test to verify product purchase functionality
     @Test
     public void testTryBuyProduct() {
         home.getProductsOnField()[0] = null;
@@ -35,7 +39,7 @@ public class HomeTest {
         assertEquals(coinsBefore - 100, coin.getCoins());
     }
 
-
+    // Test to verify adding a product from storage to the field
     @Test
     public void testAddProductFromStorage() {
         Product product = new Product(1, settings);
@@ -45,6 +49,7 @@ public class HomeTest {
         assertTrue(containsProduct(home.getProductsOnField(), product));
     }
 
+    // Test to verify merging functionality
     @Test
     public void testCheckForMerge() {
         home.getProductsOnField()[0] = new Product(1, settings);
@@ -56,6 +61,7 @@ public class HomeTest {
         assertEquals(2, home.getProductsOnField()[1].getLevel());
     }
 
+    // Test to verify special merging functionality
     @Test
     public void testSpecialMerge() {
         home.getProductsOnField()[0] = new Product(13, settings);
@@ -69,7 +75,7 @@ public class HomeTest {
         assertNull(home.getProductsOnField()[0]);
     }
 
-
+    // Test to verify that loading a game updates the display correctly
     @Test
     public void testLoadGameUpdatesDisplay() {
         home.getProductsOnField()[0] = new Product(2, settings);
@@ -80,11 +86,11 @@ public class HomeTest {
 
 
 
-
+    // Helper method to check if a product is in the array
     private boolean containsProduct(Product[] array, Product product) {
         for (Product p : array) {
-            if (p == product) return true;
+            if (p == product) return true; // Return true if product is found
         }
-        return false;
+        return false; // Return false if product is not found
     }
 }
