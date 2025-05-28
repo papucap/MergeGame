@@ -4,9 +4,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+// Home class represents the main interface of the application
+
 public class Home extends JFrame implements ActionListener  {
+
+    // Array to hold products displayed on the field
     private Product[] productsOnField = new Product[6];
+
+    // Array of buttons for each product
     private JButton[] productButtons = new JButton[6];
+
     private JButton mergeButton;
     private JButton storageButton;
     private JButton saveButton;
@@ -37,7 +44,7 @@ public class Home extends JFrame implements ActionListener  {
         this.setResizable(false);
         this.setUndecorated(true);
 
-
+        // Initialize product buttons
         for (int i = 0; i < 6; i++) {
             productButtons[i] = new JButton();
             productButtons[i].setBounds(500 + (i % 3) * 300, 200 + (i / 3) * 300, 192, 199);
@@ -157,13 +164,17 @@ public class Home extends JFrame implements ActionListener  {
             specialMerge();
         }
     }
+
+    // Method to load game data
     public void loadGame() {
         for (int i = 0; i < productButtons.length; i++) {
             updateFieldDisplay();
         }
         updateCoinLabel();
     }
+
     //Vygenerovano AI
+    // Method to update the display of products on the field
     public void updateFieldDisplay() {
         for (int i = 0; i < productButtons.length; i++) {
             JButton btn = productButtons[i];
@@ -188,6 +199,7 @@ public class Home extends JFrame implements ActionListener  {
         }
     }
 
+    // Method to attempt to buy a product
     public void tryBuyProduct(int index) {
         if (productsOnField[index] == null) {
             if (coin.getCoins() >= 100) {
@@ -202,6 +214,7 @@ public class Home extends JFrame implements ActionListener  {
         }
     }
 
+    // Method to add a product to storage
     public void addProductToStorage(int index) {
         Product p = productsOnField[index];
         storage.addProduct(p);
@@ -210,6 +223,8 @@ public class Home extends JFrame implements ActionListener  {
 
         JOptionPane.showMessageDialog(this, "Product moved to storage!");
     }
+
+    // Method to add a product from storage to the field
     public boolean addProductFromStorage(Product product) {
         for (int i = 0; i < productsOnField.length; i++) {
             if (productsOnField[i] == null) {
@@ -221,6 +236,7 @@ public class Home extends JFrame implements ActionListener  {
         return false;
     }
 
+    // Method to check for mergeable products
     public void checkForMerge() {
         for (int i = 0; i < productsOnField.length; i++) {
             Product p1 = productsOnField[i];
@@ -290,6 +306,7 @@ public class Home extends JFrame implements ActionListener  {
         JOptionPane.showMessageDialog(this, "No special combinations found to merge.");
     }
 
+    // Method to update the coin label display
     private void updateCoinLabel() {
         coinLabel.setText("Coins: "+coin.getCoins());
     }
