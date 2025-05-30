@@ -34,7 +34,7 @@ public class StatsFrame extends JFrame implements ActionListener {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setUndecorated(true);
-        ImageIcon backgroundImage = new ImageIcon("Image/"+settings.updateTheme()+"/Stats.png");
+        ImageIcon backgroundImage = new ImageIcon(getClass().getResource("/Image/"+settings.updateTheme()+"/Stats.png"));
         this.setVisible(true);
 
         Font textFont = new Font("Arial", Font.BOLD,64);
@@ -60,12 +60,13 @@ public class StatsFrame extends JFrame implements ActionListener {
         maxLevel.repaint();
         this.add(maxLevel);
 
-        resetButton = new JButton("Reset");
-        resetButton.setBounds(100,50,200,50);
+        ImageIcon reset = new ImageIcon(getClass().getResource("/Image/"+settings.updateTheme()+"/Buttons/reset.png"));
+        resetButton = new JButton(reset);
+        resetButton.setBounds(200,888,304,96);
         resetButton.addActionListener(this);
         this.add(resetButton);
 
-        ImageIcon exit = new ImageIcon("Image/Exit.png");
+        ImageIcon exit = new ImageIcon(getClass().getResource("/Image/Exit.png"));
         exitButton = new JButton(exit);
         exitButton.setBounds(0, 820, 248, 183);
         exitButton.addActionListener(this);
@@ -76,27 +77,27 @@ public class StatsFrame extends JFrame implements ActionListener {
         this.add(exitButton);
 
         //Initialize labels for special levels
-        ImageIcon icon50 = new ImageIcon("Image/"+settings.updateTheme() + "/" +statistics.isSpecialLevelUnlocked(50) +"/50.png");
+        ImageIcon icon50 = new ImageIcon(getClass().getResource("/Image/"+settings.updateTheme() + "/" +statistics.isSpecialLevelUnlocked(50) +"/50.png"));
         label50 = new JLabel(icon50);
         label50.setBounds(530,215,130,179);
         this.add(label50);
 
-        ImageIcon icon51 = new ImageIcon("Image/"+settings.updateTheme() + "/" +statistics.isSpecialLevelUnlocked(51)+"/51.png");
+        ImageIcon icon51 = new ImageIcon(getClass().getResource("/Image/"+settings.updateTheme() + "/" +statistics.isSpecialLevelUnlocked(51)+"/51.png"));
         label51 = new JLabel(icon51);
         label51.setBounds(750,215,130,179);
         this.add(label51);
 
-        ImageIcon icon52 = new ImageIcon("Image/"+settings.updateTheme() + "/" +statistics.isSpecialLevelUnlocked(52)+"/52.png");
+        ImageIcon icon52 = new ImageIcon(getClass().getResource("/Image/"+settings.updateTheme() + "/" +statistics.isSpecialLevelUnlocked(52)+"/52.png"));
         label52 = new JLabel(icon52);
         label52.setBounds(530,430,130,179);
         this.add(label52);
 
-        ImageIcon icon53 = new ImageIcon("Image/"+settings.updateTheme() + "/" +statistics.isSpecialLevelUnlocked(53)+"/53.png");
+        ImageIcon icon53 = new ImageIcon(getClass().getResource("/Image/"+settings.updateTheme() + "/" +statistics.isSpecialLevelUnlocked(53)+"/53.png"));
         label53 = new JLabel(icon53);
         label53.setBounds(750,430,130,179);
         this.add(label53);
 
-        ImageIcon icon54 = new ImageIcon("Image/"+settings.updateTheme() + "/" +statistics.isSpecialLevelUnlocked(54)+"/54.png");
+        ImageIcon icon54 = new ImageIcon(getClass().getResource("/Image/"+settings.updateTheme() + "/" +statistics.isSpecialLevelUnlocked(54)+"/54.png"));
         label54 = new JLabel(icon54);
         label54.setBounds(530,655,130,179);
         this.add(label54);

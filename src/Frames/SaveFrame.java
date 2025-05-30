@@ -42,7 +42,7 @@ public class SaveFrame extends JFrame implements ActionListener {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setUndecorated(true);
-        ImageIcon backgroundImage = new ImageIcon("Image/"+settings.updateTheme()+"/Save.png");
+        ImageIcon backgroundImage = new ImageIcon(getClass().getResource("/Image/"+settings.updateTheme()+"/Save.png"));
         this.setVisible(true);
 
 
@@ -73,7 +73,7 @@ public class SaveFrame extends JFrame implements ActionListener {
         button3.setBorderPainted(false);
         this.add(button3);
 
-        ImageIcon exit = new ImageIcon("Image/Exit.png");
+        ImageIcon exit = new ImageIcon(getClass().getResource("/Image/Exit.png"));
         exitButton = new JButton(exit);
         exitButton.setBounds(0, 850, 248, 183);
         exitButton.addActionListener(this);

@@ -22,14 +22,13 @@ public class Tutorial extends JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setUndecorated(true);
-        ImageIcon backgroundImage1 = new ImageIcon("Image/"+settings.updateTheme()+"/Tutorial.png");
-        ImageIcon backgroundImage2 = new ImageIcon("Image/"+settings.updateTheme()+"/Tutorial2.png");
-        ImageIcon exitImage = new ImageIcon("Image/Exit.png");
+        ImageIcon backgroundImage1 = new ImageIcon(getClass().getResource("/Image/"+settings.updateTheme()+"/Tutorial.png"));
+        ImageIcon backgroundImage2 = new ImageIcon(getClass().getResource("/Image/"+settings.updateTheme()+"/Tutorial2.png"));
         this.setVisible(true);
 
 
         themeButton = new JButton();
-        themeButton.setBounds(35, 850, 100, 100);
+        themeButton.setBounds(900, 870, 100, 100);
         themeButton.setOpaque(false);
         themeButton.setContentAreaFilled(false);
         themeButton.setFocusable(false);
@@ -37,14 +36,14 @@ public class Tutorial extends JFrame {
         this.add(themeButton);
 
         button2 = new JButton();
-        button2.setBounds(900, 870, 100, 100);
+        button2.setBounds(35, 850, 100, 100);
         button2.setOpaque(false);
         button2.setContentAreaFilled(false);
         button2.setFocusable(false);
         button2.setBorderPainted(false);
         this.add(button2);
 
-        ImageIcon exit = new ImageIcon("Image/Exit.png");
+        ImageIcon exit = new ImageIcon(getClass().getResource("/Image/Exit.png"));
         exitButton = new JButton(exit);
         exitButton.setBounds(0, 0, 248, 183);
         exitButton.addActionListener(e -> this.dispose());

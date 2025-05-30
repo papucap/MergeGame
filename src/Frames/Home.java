@@ -54,37 +54,37 @@ public class Home extends JFrame implements ActionListener  {
             productButtons[i].setBorderPainted(false);
             this.add(productButtons[i]);
         }
-        ImageIcon mergeIcon = new ImageIcon("Image/"+settings.updateTheme()+"/Buttons/merge.png");
+        ImageIcon mergeIcon = new ImageIcon(getClass().getResource("/Image/"+settings.updateTheme()+"/Buttons/merge.png"));
         mergeButton = new JButton(mergeIcon);
         mergeButton.setBounds(500, 850, 304, 96);
         mergeButton.addActionListener(this);
         this.add(mergeButton);
 
-        ImageIcon storageIcon = new ImageIcon("Image/"+settings.updateTheme()+"/Buttons/open_storage.png");
+        ImageIcon storageIcon = new ImageIcon(getClass().getResource("/Image/"+settings.updateTheme()+"/Buttons/open_storage.png"));
         storageButton = new JButton(storageIcon);
         storageButton.setBounds(850, 850, 304, 96);
         storageButton.addActionListener(this);
         this.add(storageButton);
 
-        ImageIcon saveIcon = new ImageIcon("Image/"+settings.updateTheme()+"/Buttons/save.png");
+        ImageIcon saveIcon = new ImageIcon(getClass().getResource("/Image/"+settings.updateTheme()+"/Buttons/save.png"));
         saveButton = new JButton(saveIcon);
         saveButton.setBounds(1200, 950, 304, 96);
         saveButton.addActionListener(this);
         this.add(saveButton);
 
-        ImageIcon loadIcon = new ImageIcon("Image/"+settings.updateTheme()+"/Buttons/load.png");
+        ImageIcon loadIcon = new ImageIcon(getClass().getResource("/Image/"+settings.updateTheme()+"/Buttons/load.png"));
         loadButton = new JButton(loadIcon);
         loadButton.setBounds(1200, 850, 304, 96);
         loadButton.addActionListener(this);
         this.add(loadButton);
 
-        ImageIcon settingsIcon = new ImageIcon("Image/"+settings.updateTheme()+"/Buttons/settings.png");
+        ImageIcon settingsIcon = new ImageIcon(getClass().getResource("/Image/"+settings.updateTheme()+"/Buttons/settings.png"));
         settingsButton = new JButton(settingsIcon);
         settingsButton.setBounds(850, 950, 304, 96);
         settingsButton.addActionListener(this);
         this.add(settingsButton);
 
-        ImageIcon exit = new ImageIcon("Image/Exit.png");
+        ImageIcon exit = new ImageIcon(getClass().getResource("/Image/Exit.png"));
         exitButton = new JButton(exit);
         exitButton.setBounds(0, 850, 248, 183);
         exitButton.addActionListener(this);
@@ -94,19 +94,19 @@ public class Home extends JFrame implements ActionListener  {
         exitButton.setBorderPainted(false);
         this.add(exitButton);
 
-        ImageIcon tutorialIcon = new ImageIcon("Image/"+settings.updateTheme()+"/Buttons/tutorial.png");
+        ImageIcon tutorialIcon = new ImageIcon(getClass().getResource("/Image/"+settings.updateTheme()+"/Buttons/tutorial.png"));
         tutorialButton = new JButton(tutorialIcon);
         tutorialButton.setBounds(1550, 850, 304, 96);
         tutorialButton.addActionListener(this);
         this.add(tutorialButton);
 
-        ImageIcon statisticsIcon = new ImageIcon("Image/"+settings.updateTheme()+"/Buttons/stats.png");
+        ImageIcon statisticsIcon = new ImageIcon(getClass().getResource("/Image/"+settings.updateTheme()+"/Buttons/stats.png"));
         statisticsButton = new JButton(statisticsIcon);
         statisticsButton.setBounds(1550, 950, 304, 96);
         statisticsButton.addActionListener(this);
         this.add(statisticsButton);
 
-        ImageIcon specialIcon = new ImageIcon("Image/"+settings.updateTheme()+"/Buttons/special_merge.png");
+        ImageIcon specialIcon = new ImageIcon(getClass().getResource("/Image/"+settings.updateTheme()+"/Buttons/special_merge.png"));
         specialMergeButton = new JButton(specialIcon);
         specialMergeButton.setBounds(500, 950, 304, 96);
         specialMergeButton.addActionListener(this);
@@ -121,7 +121,7 @@ public class Home extends JFrame implements ActionListener  {
         this.setVisible(true);
         updateFieldDisplay();
 
-        ImageIcon backgroundIcon = new ImageIcon("Image/"+settings.updateTheme()+"/BackgroundHome.png");
+        ImageIcon backgroundIcon = new ImageIcon(getClass().getResource("/Image/"+settings.updateTheme()+"/BackgroundHome.png"));
         backgroundLabel = new JLabel(backgroundIcon);
         backgroundLabel.setSize(1920, 1080);
         this.add(backgroundLabel);

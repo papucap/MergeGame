@@ -29,25 +29,25 @@ public class Product {
     // Method to load the image based on the product level
     private ImageIcon loadImage(int level, Settings settings) {
         if (level < 15){
-            return new ImageIcon("Image/" + settings.updateTheme() + "/Level/" + level + ".png");
+            return new ImageIcon(getClass().getResource("/Image/" + settings.updateTheme() + "/Level/" + level + ".png"));
         }
         else if (level == 50) {
-            return new ImageIcon("Image/" + settings.updateTheme()+ "/true/50.png");
+            return new ImageIcon(getClass().getResource("/Image/" + settings.updateTheme()+ "/true/50.png"));
         }
         else if (level == 51) {
-            return new ImageIcon("Image/" + settings.updateTheme()+ "/true/51.png");
+            return new ImageIcon(getClass().getResource("/Image/" + settings.updateTheme()+ "/true/51.png"));
         }
         else if (level == 52) {
-            return new ImageIcon("Image/" + settings.updateTheme()+ "/true/52.png");
+            return new ImageIcon(getClass().getResource("/Image/" + settings.updateTheme()+ "/true/52.png"));
         }
         else if (level == 53) {
-            return new ImageIcon("Image/" + settings.updateTheme()+ "/true/53.png");
+            return new ImageIcon(getClass().getResource("/Image/" + settings.updateTheme()+ "/true/53.png"));
         }
         else if (level == 54) {
-            return new ImageIcon("Image/" + settings.updateTheme()+ "/true/54.png");
+            return new ImageIcon(getClass().getResource("/Image/" + settings.updateTheme()+ "/true/54.png"));
         }
         else{
-            return new ImageIcon("Image/" + settings.updateTheme()+ "/Level/15.png");
+            return new ImageIcon(getClass().getResource("/Image/" + settings.updateTheme()+ "/Level/15.png"));
         }
     }
 }

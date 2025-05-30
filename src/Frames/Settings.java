@@ -35,7 +35,7 @@ public class Settings extends JFrame implements ActionListener {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setUndecorated(true);
-        ImageIcon backgroundImage = new ImageIcon("Image/Settings.png");
+        ImageIcon backgroundImage = new ImageIcon(getClass().getResource("/Image/Settings.png"));
         this.setVisible(true);
 
 
@@ -57,7 +57,7 @@ public class Settings extends JFrame implements ActionListener {
         lightButton.setBorderPainted(false);
         this.add(lightButton);
 
-        ImageIcon exit = new ImageIcon("Image/Exit.png");
+        ImageIcon exit = new ImageIcon(getClass().getResource("/Image/Exit.png"));
         exitButton = new JButton(exit);
         exitButton.setBounds(0, 850, 248, 183);
         exitButton.addActionListener(this);

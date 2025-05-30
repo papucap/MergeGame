@@ -4,9 +4,12 @@ import Product.Coin;
 import Product.Statistics;
 import Product.Storage;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.Objects;
 
 // MainMenu class represents the main menu of the application
 
@@ -22,6 +25,8 @@ public class MainMenu extends JFrame implements ActionListener {
     private Statistics statistics;
 
     public MainMenu(Coin coin) {
+        this.repaint();
+        this.revalidate();
         this.coin = coin;
         this.statistics = new Statistics();
         this.setTitle("Main Menu");
@@ -31,7 +36,7 @@ public class MainMenu extends JFrame implements ActionListener {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setUndecorated(true);
-        ImageIcon backgroundImage = new ImageIcon("Image/MainMenu.png");
+        ImageIcon backgroundImage = new ImageIcon(getClass().getResource("/Image/MainMenu.png"));
         this.setVisible(true);
 
 
@@ -44,7 +49,7 @@ public class MainMenu extends JFrame implements ActionListener {
         button.setBorderPainted(false);
         this.add(button);
 
-        ImageIcon exit = new ImageIcon("Image/Exit.png");
+        ImageIcon exit = new ImageIcon(getClass().getResource("/Image/Exit.png"));
         button2 = new JButton(exit);
         button2.setBounds(0, 850, 248, 183);
         button2.addActionListener(this);
