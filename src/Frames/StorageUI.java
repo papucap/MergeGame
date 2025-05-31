@@ -28,7 +28,7 @@ public class StorageUI extends JFrame {
         panel.setLayout(new GridLayout(0, 4, 10, 10));
         refreshStorage();
 
-        JScrollPane scrollPane = new JScrollPane(panel); //Internet: jak pouzivat JScrollPane https://www.geeksforgeeks.org/java-jscrollpane/
+        JScrollPane scrollPane = new JScrollPane(panel); //Google: How to use JScrollPane https://www.geeksforgeeks.org/java-jscrollpane/
 
         add(scrollPane, BorderLayout.CENTER);
 
